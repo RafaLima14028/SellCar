@@ -1,0 +1,41 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #ecedf2;
+  font-family: "Poppins", Arial, sans-serif;
+}
+
+header {
+  width: 100%;
+  position: relative;
+  margin: 0 auto;
+  background-color: #ffffff;
+}
+
+header a img {
+  position: absolute;
+  height: 80px;
+  width: 80px;
+  margin: 10px;
+}
+
+#nav-list {
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  line-height: 100px;
+}
+
+#nav-list li {
+  display: inline-block;
+  margin: 0 5px;
+}
+
+#nav-list li a {
+  text-decoration: none;
+  color: #ffffff;
+  background-color: #520002;
+  padding: 10px 15px;
+  border-radius: 50px;
+}

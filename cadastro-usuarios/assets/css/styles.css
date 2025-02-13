@@ -1,0 +1,18 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #ecedf2;
+  font-family: "Poppins", Arial, sans-serif;
+}
+
+header {
+  width: 100%;
+  margin: 0 auto;
+  background-color: #ffffff;
+}
+
+header a img {
+  height: 80px;
+  width: 80px;
+  margin: 10px;
+}

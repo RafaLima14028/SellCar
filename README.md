@@ -2,9 +2,28 @@
 
 <h2>Logo da Página:</h2>
 
-<img src="images/sellcar 500x500.png" alt="Logo da Página" width="250">
+<img src="images/sellcar 500x500.png" alt="Logo da Página" height="250" width="250">
+
+<h2>Cores da Página:</h2>
+
+- Branco claro: `#ffffff`
+- Branco mais escuro: `#ecedf2`
+- Vermelho (vinho): `#520002`
+- Cor do texto preto: `#000000`
+- Cor do texto branco: `#ffffff`
+
+<h2>Fontes da Página:</h2>
+
+- Texto do header: `Poppins, regular, 20px, 4% (letter spacing)`
+- Texto bold do header: `Poppins, bold, 20px, 4% (letter spacing)`
+- Texto card carro: `Poppins, regular, 18px, 4% (letter spacing)`
+- Texto card cidade: `Poppins, semibold, 18px, 4% (letter spacing)`
+- Texto detalhes do anúncio: `Poppins, regular, 36px, 4% (letter spacing)`
+- Texto detalhes do anúncio (semi bold): `Poppins, semibold, 36px, 4% (letter spacing)`
 
 <h2>Telas:</h2>
+
+[Projeto no Figma](https://www.figma.com/design/ieuP0RSjxkkAqmn9j0dz4Y/SellCar?node-id=0-1&t=xoTmU9SrXtjWqAoy-1)
 
 <h3>Página Principal Externa (Pública):</h3>
 
@@ -61,3 +80,28 @@ Quando o usuário clicar no **link/botão de visualização detalhada do anúnci
 Quando o usuário clicar no **botão/link de visualização dos interesses do anúncio, na listagem anterior, deverá ser apresentada uma página contendo todas as informações de todos os interesses registrados pelos internautas no respectivo anúncio (nome, telefone e mensagem de interesse em si).**
 
 <img src="images/Página de Listagem de Interesses (restrita).png" alt="Página de Listagem de Interesses (restrita)">
+
+<h2>Como Contribuir:</h2>
+
+Para clonar o repositório e utilizar, execute:
+
+```bash
+git clone https://github.com/RafaLima14028/SellCar.git
+cd SellCar
+```
+
+Para fazer um commit, execute:
+
+```bash
+git add .
+git commit -m "mensagem do commit"
+git push
+```
+
+<h2>Contribuidores:</h2>
+
+Este projeto foi desenvolvido como parte de um trabalho de faculdade. Agradecemos a contribuição de todos os membros da equipe:
+
+- [Rafael](https://github.com/RafaLima14028)
+- [Gabriel](https://github.com/gkatog)
+- [Lucas](https://github.com/LucasDaniel1)
