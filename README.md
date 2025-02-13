@@ -14,12 +14,15 @@
 
 <h2>Fontes da Página:</h2>
 
-- Texto do header: `Poppins, regular, 20px, 4% (letter spacing)`
-- Texto bold do header: `Poppins, bold, 20px, 4% (letter spacing)`
-- Texto card carro: `Poppins, regular, 18px, 4% (letter spacing)`
-- Texto card cidade: `Poppins, semibold, 18px, 4% (letter spacing)`
-- Texto detalhes do anúncio: `Poppins, regular, 36px, 4% (letter spacing)`
-- Texto detalhes do anúncio (semi bold): `Poppins, semibold, 36px, 4% (letter spacing)`
+Padrão das fontes usadas foi dada pela seguinte tuplas: (font-family), (font-weight), (font-size), (letter-spacing).
+
+- Texto do header: `Poppins, regular, 20px, 1px`
+- Texto bold do header: `Poppins, 600, 20px , 1px`
+- Texto card carro: `Poppins, regular, 18px, 1px`
+- Texto card cidade: `Poppins, semibold, 18px, 1px`
+- Texto detalhes do anúncio: `Poppins, regular, 36px, 1px`
+- Texto detalhes do anúncio (semi bold): `Poppins, semibold, 36px, 1px`
+- Texto footer: `Poppins, 600, 18px, 1px`
 
 <h2>Telas:</h2>
 
