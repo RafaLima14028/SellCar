@@ -25,7 +25,62 @@
     </header>
 
     <main>
+        <form enctype="multipart/form-data" action="cadastraVeiculo.php" method="post">
+            <div>
+                <input type="text" placeholder="Marca" id="marca" name="marca" class="input-sombra input-borda input-dados"
+                    autofocus autocomplete="off" required>
+            </div>
 
+            <div>
+                <input type="text" placeholder="Modelo" id="modelo" name="modelo" class="input-sombra input-borda input-dados"
+                    autocomplete="off" required>
+            </div>
+
+            <div>
+                <input type="number" placeholder="Ano" id="ano" name="ano" class="input-sombra input-borda input-dados"
+                    autocomplete="off" required min="1886" max="2026">
+            </div>
+
+            <div>
+                <input type="text" id="cor" name="cor" class="input-sombra input-borda input-dados" placeholder="Cor"
+                    autocomplete="off" required minlength="4">
+            </div>
+
+            <div>
+                <input type="number" name="quilemetragem" id="quilemetragem" class="input-sombra input-borda input-dados"
+                    placeholder="Quilemetragem" required min="0">
+            </div>
+
+            <div>
+                <textarea name="descricao" id="descricao" class="input-sombra" placeholder="Descrição" rows="5"
+                    cols="100"></textarea>
+            </div>
+
+            <div>
+                <input type="number" name="valor" id="valor" class="input-sombra input-borda input-dados" placeholder="Valor"
+                    required min="1000">
+            </div>
+
+            <div>
+                <input type="text" name="estado" id="estado" class="input-sombra input-borda input-dados" placeholder="Estado"
+                    required minlength="4">
+            </div>
+
+            <div>
+                <input type="text" name="cidade" id="cidade" class="input-sombra input-borda input-dados" placeholder="Cidade"
+                    required autocomplete="off">
+            </div>
+
+            <div class="input-sombra" id="div-input-img">
+                <img src="assets/img/camera-icone.png" alt="Icone de camera" width="25" height="25">
+
+                <label for="imgs-carro">Selecionar Imangens</label>
+
+                <input type="file" id="imgs-carro" accept=".png, .jpg, .jpeg" autocomplete="off" required>
+            </div>
+
+            <input type="submit" value="Cadastrar" name="btn-enviar" id="btn-enviar">
+        </form>
     </main>
 
     <footer>

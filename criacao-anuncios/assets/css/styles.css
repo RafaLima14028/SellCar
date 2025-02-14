@@ -26,18 +26,117 @@ nav {
 }
 
 main {
+  margin: 0 auto;
+  padding: 20px 20px;
+  margin-top: 30px;
   background-color: #ffffff;
-  width: 70%;
-  position: relative;
-  left: 10%;
+  width: 60%;
+}
+
+/* Chrome, Safari, Edge, Opera -> remove as setas para cima e para baixo dos input's do tipo number*/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Firefox */
+input[type="number"] {
+  appearance: auto;
+  -moz-appearance: textfield;
+}
+
+.input-dados {
+  padding: 8px 0;
+  margin: 10px 0;
+  width: 100%;
+}
+
+input::placeholder {
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  padding-left: 10px;
+  font-size: 14px;
+}
+
+.input-sombra {
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.4);
+}
+
+.input-borda {
+  border-radius: 50px;
+  border: 1px solid #000000;
+}
+
+textarea {
+  padding: 8px 0;
+  margin: 10px 0;
+  width: 100%;
+  border: 1px solid #000000;
+  border-radius: 30px;
+  resize: none;
+  overflow-x: auto;
+}
+
+textarea::placeholder {
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  padding-left: 10px;
+  font-size: 14px;
+}
+
+#div-input-img {
+  width: 30%;
+  margin: 0 auto;
+  border: 1px solid #000000;
+  border-radius: 50px;
+  cursor: pointer;
+  padding: 5px 35px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+#div-input-img img {
+  width: 25px;
+  height: 25px;
+  vertical-align: middle;
+  margin-top: -7px;
+}
+
+#div-input-img label {
+  cursor: pointer;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  padding-left: 10px;
+  opacity: 0.5;
+}
+
+#div-input-img input[type="file"] {
+  display: none;
+}
+
+#btn-enviar {
+  background-color: #520002;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 20px;
+  letter-spacing: 1px;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  display: block;
+  margin: 12px auto 0 auto;
+  padding: 10px 30px;
 }
 
 footer {
   font-size: 18px;
   font-weight: 600;
   letter-spacing: 1px;
-  text-align: center;
-  padding: 15px 0;
+  padding: 20px 0;
   background-color: #ffffff;
-  margin-top: 35px;
+  width: 100%;
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  left: 0;
 }
