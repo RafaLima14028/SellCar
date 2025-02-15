@@ -31,6 +31,8 @@ main {
   margin-top: 30px;
   background-color: #ffffff;
   width: 60%;
+  border-radius: 8px;
+  text-align: center;
 }
 
 /* Chrome, Safari, Edge, Opera -> remove as setas para cima e para baixo dos input's do tipo number*/
@@ -47,14 +49,18 @@ input[type="number"] {
 
 .input-dados {
   padding: 8px 0;
-  margin: 10px 0;
-  width: 100%;
+  margin: 8px auto;
+  width: 98%;
+
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  padding-left: 10px;
+  font-size: 14px;
 }
 
 input::placeholder {
   font-weight: bold;
   letter-spacing: 0.5px;
-  padding-left: 10px;
   font-size: 14px;
 }
 
@@ -64,29 +70,38 @@ input::placeholder {
 
 .input-borda {
   border-radius: 50px;
-  border: 1px solid #000000;
+  border: 1px solid rgba(0, 0, 0, 0.7);
 }
 
 textarea {
   padding: 8px 0;
-  margin: 10px 0;
-  width: 100%;
-  border: 1px solid #000000;
+  margin: 8px 0 0 0;
+  width: 98%;
+  border: 1px solid rgba(0, 0, 0, 0.7);
   border-radius: 30px;
   resize: none;
   overflow-x: auto;
-}
 
-textarea::placeholder {
   font-weight: bold;
   letter-spacing: 0.5px;
   padding-left: 10px;
   font-size: 14px;
 }
 
+textarea::placeholder {
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  font-size: 14px;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+}
+
 #div-input-img {
   width: 30%;
-  margin: 0 auto;
+  margin: 8px auto;
   border: 1px solid #000000;
   border-radius: 50px;
   cursor: pointer;
@@ -124,7 +139,7 @@ textarea::placeholder {
   border: none;
   cursor: pointer;
   display: block;
-  margin: 12px auto 0 auto;
+  margin: 20px auto 0 auto;
   padding: 10px 30px;
 }
 
