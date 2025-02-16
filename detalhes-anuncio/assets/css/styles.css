@@ -57,19 +57,94 @@ nav {
   top: 3px;
 }
 
+#nav-list li:last-child a {
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
 main {
+  margin-top: 30px;
+  width: 80%;
+  margin: 0 auto;
+}
+
+#div-imgs,
+#detalhes-carro,
+#descricao-carro {
   background-color: #ffffff;
-  width: 70%;
-  position: relative;
-  left: 10%;
+  width: 95%;
+  margin: 25px auto;
+  border-radius: 15px;
+  padding: 5px 30px;
+}
+
+#div-imgs {
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.icone-seta {
+  height: 20px;
+  width: 20px;
+  fill: black;
+  cursor: pointer;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.icone-seta.left {
+  transform: rotate(180deg);
+  margin-left: -20px;
+}
+
+.icone-seta.right {
+  margin-right: -20px;
+}
+
+#imgs-carro {
+  height: 80%;
+  width: 80%;
+  margin: 0 auto;
+}
+
+#detalhes-carro {
+  display: flex;
+  justify-content: space-between;
+  height: auto;
+}
+
+#detalhes-carro-lado-esquerdo {
+  line-height: 15px;
+}
+
+#detalhes-carro-lado-direito {
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: end;
+  font-size: 20px;
+}
+
+#detalhe-carro-cidade {
+  font-weight: 550;
+}
+
+#detalhe-carro-valor {
+  font-weight: 900;
+}
+
+#descricao-carro {
+  line-height: 35px;
 }
 
 footer {
   font-size: 18px;
   font-weight: 600;
   letter-spacing: 1px;
-  text-align: center;
-  padding: 15px 0;
+  padding: 20px 0;
   background-color: #ffffff;
-  margin-top: 35px;
+  width: 100%;
+  text-align: center;
 }

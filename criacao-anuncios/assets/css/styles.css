@@ -99,7 +99,7 @@ textarea:focus {
   outline: none;
 }
 
-#div-input-img {
+/* #div-input-img {
   width: 30%;
   margin: 8px auto;
   border: 1px solid #000000;
@@ -122,6 +122,34 @@ textarea:focus {
   font-weight: bold;
   letter-spacing: 0.5px;
   padding-left: 10px;
+  opacity: 0.5;
+} */
+
+#div-input-img {
+  width: 30%;
+  margin: 8px auto;
+  border: 1px solid #000000;
+  border-radius: 50px;
+  cursor: pointer;
+  padding: 5px 35px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 5px;
+}
+
+#div-input-img img {
+  width: 25px;
+  height: 25px;
+  margin-top: -4px;
+}
+
+#div-input-img label {
+  cursor: pointer;
+  font-weight: bold;
+  letter-spacing: 0.5px;
   opacity: 0.5;
 }
 

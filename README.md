@@ -21,8 +21,8 @@ Padrão das fontes usadas foi dada pela seguinte tuplas: (font-family), (font-we
 - Texto card carro: `Poppins, regular, 18px, 1px`
 - Texto card cidade: `Poppins, semibold, 18px, 1px`
 - Texto detalhes do anúncio: `Poppins, regular, 36px, 1px`
-- Texto detalhes do anúncio (semi bold): `Poppins, semibold, 36px, 1px`
-- Texto footer: `Poppins, 600, 18px, 1px`
+- Texto detalhes do anúncio (semi bold): `Poppins, semibold, 550, 1px`
+- Texto footer: `Poppins, 600, 900, 1px`
 
 <h2>Telas:</h2>
 
