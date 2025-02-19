@@ -47,9 +47,14 @@ nav {
   border-radius: 50px;
 }
 
-#nav-list li a:has(> img) {
+#nav-list li a:has(> span) {
+  height: 100%;
   background-color: #ffffff;
   color: #000000;
+}
+
+#nav-list li a:has(> span) span {
+  vertical-align: middle;
 }
 
 #nav-list li a img {
@@ -63,14 +68,23 @@ nav {
 }
 
 main {
-  width: 100%;
-  margin: 50px 0;
+  width: 95%;
+  margin: 50px auto;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 30px;
 }
 
 #container-card {
-  margin-left: 50px;
-  width: 28%;
-  height: auto;
+  /* width: 28%; */
+  flex-basis: 28%;
+  max-width: 28%;
+
+  height: 397px;
   background-color: #ffffff;
   border-radius: 30px;
   overflow: hidden;

@@ -140,10 +140,11 @@ textarea:focus {
   gap: 5px;
 }
 
-#div-input-img img {
+#div-input-img span {
   width: 25px;
   height: 25px;
   margin-top: -4px;
+  opacity: 0.9;
 }
 
 #div-input-img label {

@@ -47,9 +47,14 @@ nav {
   border-radius: 50px;
 }
 
-#nav-list li a:has(> img) {
+#nav-list li a:has(> span) {
+  height: 100%;
   background-color: #ffffff;
   color: #000000;
+}
+
+#nav-list li a:has(> span) span {
+  vertical-align: middle;
 }
 
 #nav-list li a img {
@@ -84,21 +89,24 @@ main {
   height: 100%;
 }
 
-.icone-seta {
-  height: 20px;
-  width: 20px;
-  fill: black;
+.material-icons {
+  height: auto;
+  margin: auto 0;
   cursor: pointer;
-  margin-top: auto;
-  margin-bottom: auto;
+
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
 }
 
-.icone-seta.left {
-  transform: rotate(180deg);
+.material-icons.left {
   margin-left: -20px;
 }
 
-.icone-seta.right {
+.material-icons.right {
   margin-right: -20px;
 }
 
