@@ -3,6 +3,11 @@ body {
   padding: 0;
   background-color: #ecedf2;
   font-family: "Poppins", Arial, sans-serif;
+
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 header {
@@ -155,4 +160,10 @@ footer {
   background-color: #ffffff;
   width: 100%;
   text-align: center;
+}
+
+@media (max-width: 714px) {
+  footer {
+    font-size: 15px;
+  }
 }

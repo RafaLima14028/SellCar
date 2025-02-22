@@ -6,6 +6,8 @@
     <meta charset="UTF-8">
     <title>SellCar</title>
 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -21,7 +23,7 @@
     <header>
         <nav>
             <a href="index.html" id="img-logo">
-                <img src="assets/img/sellcar-500x500.png" width="70" height="70" alt="Logo da Empresa">
+                <img src="assets/img/sellcar-500x500.png" alt="Logo da Empresa" id="img-logo">
             </a>
         </nav>
     </header>
@@ -54,7 +56,7 @@
             </div>
 
             <div>
-                <textarea name="descricao" id="descricao" class="input-sombra" placeholder="Descrição" rows="5"
+                <textarea name="descricao" id="descricao" class="input-sombra" placeholder="Descrição" rows="6"
                     cols="100"></textarea>
             </div>
 
@@ -65,7 +67,7 @@
 
             <div>
                 <input type="text" name="estado" id="estado" class="input-sombra input-borda input-dados"
-                    placeholder="Estado" required minlength="4">
+                    placeholder="Estado" required minlength="2" maxlength="2">
             </div>
 
             <div>
@@ -78,10 +80,10 @@
                     add_photo_alternate
                 </span>
 
-                <label for="imgs-carro">Selecionar Imangens</label>
+                <label for="imgs-carro">Selecionar Imagens</label>
 
                 <input type="file" id="imgs-carro" name="imgs-carro" accept=".png, .jpg, .jpeg" autocomplete="off"
-                    required>
+                    multiple required>
             </div>
 
             <input type="submit" value="Cadastrar" name="btn-enviar" id="btn-enviar">
