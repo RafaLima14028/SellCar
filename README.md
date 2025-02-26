@@ -96,6 +96,7 @@ cd SellCar
 Para fazer um commit, execute:
 
 ```bash
+git pull
 git add .
 git commit -m "mensagem do commit"
 git push
