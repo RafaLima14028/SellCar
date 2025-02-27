@@ -75,6 +75,7 @@ nav {
 .a-menu-hamburguer {
   color: #000000;
   text-decoration: none;
+  display: none;
 }
 
 main {
@@ -91,6 +92,7 @@ main {
   margin: 25px auto;
   border-radius: 15px;
   padding: 5px 30px;
+  box-sizing: border-box;
 }
 
 #div-imgs {
@@ -104,6 +106,7 @@ main {
   margin: auto 0;
   cursor: pointer;
 
+  /* Não permite que o usuário não copie a seta */
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
   -khtml-user-select: none; /* Konqueror HTML */
@@ -213,6 +216,10 @@ footer {
   body.no-scroll {
     overflow: hidden;
     position: fixed;
+  }
+
+  main {
+    width: 95%;
   }
 
   footer {
