@@ -104,6 +104,21 @@ textarea:focus {
   outline: none;
 }
 
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: none;
+  box-sizing: content-box;
+  cursor: pointer;
+}
+
+select option {
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  font-size: 14px;
+}
+
 #div-input-img {
   width: 30%;
   margin: 8px auto;
@@ -116,7 +131,6 @@ textarea:focus {
   justify-content: center;
   align-items: center;
   flex-wrap: nowrap;
-  /* gap: 5px; */
 }
 
 #div-input-img span {
