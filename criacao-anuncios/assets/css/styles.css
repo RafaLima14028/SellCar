@@ -60,13 +60,13 @@ input[type="number"] {
   font-weight: bold;
   letter-spacing: 0.5px;
   padding-left: 10px;
-  font-size: 14px;
+  font-size: 0.9em;
 }
 
 input::placeholder {
   font-weight: bold;
   letter-spacing: 0.5px;
-  font-size: 14px;
+  font-size: 0.9em;
 }
 
 .input-sombra {
@@ -90,13 +90,12 @@ textarea {
   font-weight: bold;
   letter-spacing: 0.5px;
   padding-left: 10px;
-  font-size: 14px;
+  font-size: 1.1em;
 }
 
 textarea::placeholder {
   font-weight: bold;
   letter-spacing: 0.5px;
-  font-size: 14px;
 }
 
 input:focus,
@@ -116,7 +115,7 @@ select {
 select option {
   font-weight: bold;
   letter-spacing: 0.5px;
-  font-size: 14px;
+  font-size: 1em;
 }
 
 #div-input-img {
@@ -145,7 +144,7 @@ select option {
   font-weight: bold;
   letter-spacing: 0.5px;
   opacity: 0.5;
-  font-size: 14px;
+  font-size: 0.9em;
 }
 
 #div-input-img input[type="file"] {
@@ -156,7 +155,7 @@ select option {
   background-color: #520002;
   color: #ffffff;
   font-weight: 600;
-  font-size: 20px;
+  font-size: 1.2em;
   letter-spacing: 1px;
   border-radius: 50px;
   border: none;
@@ -167,7 +166,7 @@ select option {
 }
 
 footer {
-  font-size: 18px;
+  font-size: 1.2em;
   font-weight: 600;
   letter-spacing: 1px;
   padding: 20px 0;
@@ -199,6 +198,6 @@ footer {
   }
 
   footer {
-    font-size: 15px;
+    font-size: 1em;
   }
 }

@@ -42,7 +42,7 @@ nav {
 }
 
 #nav-list li a {
-  font-size: 20px;
+  font-size: 1.2em;
   font-weight: 600;
   letter-spacing: 1px;
   text-decoration: none;
@@ -145,7 +145,7 @@ main {
   flex-direction: column;
   justify-content: space-between;
   align-items: end;
-  font-size: 20px;
+  font-size: 1.2em;
 }
 
 #detalhe-carro-cidade {
@@ -161,7 +161,7 @@ main {
 }
 
 footer {
-  font-size: 18px;
+  font-size: 1.2em;
   font-weight: 600;
   letter-spacing: 1px;
   padding: 20px 0;
@@ -223,6 +223,6 @@ footer {
   }
 
   footer {
-    font-size: 15px;
+    font-size: 1em;
   }
 }
