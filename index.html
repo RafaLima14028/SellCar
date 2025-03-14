@@ -3,14 +3,14 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>SellCar - Portal de Anúncios de Veículos</title>
+    <title>SellCar - Página Principal</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -21,7 +21,7 @@
 <body>
     <header>
         <nav>
-            <a href="index.html" id="img-logo">
+            <a href="../index.html" id="img-logo">
                 <img src="assets/img/sellcar-500x500.png" width="70" height="70" alt="Logo da Empresa">
             </a>
 
@@ -54,127 +54,94 @@
     </header>
 
     <main>
-        <!-- Painel de Busca -->
         <section id="painel-busca">
-            <h2>Encontre o veículo dos seus sonhos</h2>
+            <h2>Buscar Veículos</h2>
             <form id="form-busca">
-                <select id="marca" name="marca" required>
-                    <option value="" disabled selected>Selecione a marca</option>
-                    <option value="honda">Honda</option>
-                    <option value="toyota">Toyota</option>
-                    <option value="volkswagen">Volkswagen</option>
-                    <option value="ford">Ford</option>
-                </select>
+                <div class="campo-busca">
+                    <label for="marca">Marca:</label>
+                    <select id="marca" name="marca">
+                        <option value="">Selecione uma marca</option>
+                        <option value="Honda">Honda</option>
+                        <option value="Toyota">Toyota</option>
+                        <option value="Ford">Ford</option>
+                        <option value="Chevrolet">Chevrolet</option>
+                    </select>
+                </div>
 
-                <select id="modelo" name="modelo" required>
-                    <option value="" disabled selected>Selecione o modelo</option>
-                    <option value="city">City</option>
-                    <option value="corolla">Corolla</option>
-                    <option value="gol">Gol</option>
-                    <option value="ka">Ka</option>
-                </select>
+                <div class="campo-busca">
+                    <label for="modelo">Modelo:</label>
+                    <select id="modelo" name="modelo">
+                        <option value="">Selecione um modelo</option>
+                        <option value="City">City</option>
+                        <option value="Civic">Civic</option>
+                        <option value="Corolla">Corolla</option>
+                        <option value="Focus">Focus</option>
+                    </select>
+                </div>
 
-                <select id="cidade" name="cidade" required>
-                    <option value="" disabled selected>Selecione a cidade</option>
-                    <option value="uberlandia">Uberlândia</option>
-                    <option value="sao-paulo">São Paulo</option>
-                    <option value="rio-de-janeiro">Rio de Janeiro</option>
-                    <option value="belo-horizonte">Belo Horizonte</option>
-                </select>
+                <div class="campo-busca">
+                    <label for="cidade">Cidade:</label>
+                    <select id="cidade" name="cidade">
+                        <option value="">Selecione uma cidade</option>
+                        <option value="Uberlândia">Uberlândia</option>
+                        <option value="São Paulo">São Paulo</option>
+                        <option value="Rio de Janeiro">Rio de Janeiro</option>
+                        <option value="Belo Horizonte">Belo Horizonte</option>
+                    </select>
+                </div>
 
                 <button type="submit">Buscar</button>
             </form>
         </section>
 
-        <!-- Lista de Anúncios -->
         <section id="lista-anuncios">
-            <!-- Card 1 -->
-            <div class="container-card">
-                <a href="../detalhes-anuncio/index.html">
-                    <div class="container-img">
-                        <img src="assets/img/new-city-hatchback.png" alt="Imagem do veículo">
-                    </div>
-                </a>
+            <h2>Resultados da Busca</h2>
+            <div id="container-cards">
+                <!-- Exemplo de card de anúncio -->
+                <div class="container-card">
+                    <a href="../detalhes-anuncio/index.html">
+                        <div class="container-img">
+                            <img src="assets/img/new-city-hatchback.png" alt="Imagem do veículo">
+                        </div>
+                    </a>
 
-                <div class="detalhes-carro">
-                    <div class="detalhes-carro-esquerda">
-                        <p>Marca: Honda</p>
-                        <p>Modelo: City</p>
-                        <p>Ano: 2025</p>
-                    </div>
-
-                    <div class="detalhes-carro-direto">
-                        <div class="detalhes-carro-direto-icones">
-                            <a href="../listagem-interesses/index.html">
-                                <span class="material-icons mode_comment">
-                                    mode_comment
-                                </span>
-                            </a>
-
-                            <a href="#">
-                                <span class="material-icons mode_comment">
-                                    delete
-                                </span>
-                            </a>
+                    <div class="detalhes-carro">
+                        <div class="detalhes-carro-esquerda">
+                            <p>Marca: Honda</p>
+                            <p>Modelo: City</p>
+                            <p>Ano: 2025</p>
                         </div>
 
-                        <div class="detalhes-carro-direto-cidade">
-                            <p>Em Uberlândia</p>
+                        <div class="detalhes-carro-direto">
+                            <div class="detalhes-carro-direto-icones">
+                                <a href="../listagem-interesses/index.html">
+                                    <span class="material-icons mode_comment">
+                                        mode_comment
+                                    </span>
+                                </a>
+
+                                <a href="#">
+                                    <span class="material-icons mode_comment">
+                                        delete
+                                    </span>
+                                </a>
+                            </div>
+
+                            <div class="detalhes-carro-direto-cidade">
+                                <p>Em Uberlândia</p>
+                            </div>
                         </div>
+                    </div>
+
+                    <div class="detalhes-carro-valor">
+                        <p>
+                            <strong>R$ 120.000,00</strong>
+                        </p>
                     </div>
                 </div>
 
-                <div class="detalhes-carro-valor">
-                    <p>
-                        <strong>R$ 120.000,00</strong>
-                    </p>
-                </div>
+                <!-- Adicione mais cards de anúncios aqui -->
             </div>
-
-            <!-- Card 2 -->
-            <div class="container-card">
-                <a href="../detalhes-anuncio/index.html">
-                    <div class="container-img">
-                        <img src="assets/img/new-city-hatchback.png" alt="Imagem do veículo">
-                    </div>
-                </a>
-
-                <div class="detalhes-carro">
-                    <div class="detalhes-carro-esquerda">
-                        <p>Marca: Toyota</p>
-                        <p>Modelo: Corolla</p>
-                        <p>Ano: 2023</p>
-                    </div>
-
-                    <div class="detalhes-carro-direto">
-                        <div class="detalhes-carro-direto-icones">
-                            <a href="../listagem-interesses/index.html">
-                                <span class="material-icons mode_comment">
-                                    mode_comment
-                                </span>
-                            </a>
-
-                            <a href="#">
-                                <span class="material-icons mode_comment">
-                                    delete
-                                </span>
-                            </a>
-                        </div>
-
-                        <div class="detalhes-carro-direto-cidade">
-                            <p>Em São Paulo</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="detalhes-carro-valor">
-                    <p>
-                        <strong>R$ 150.000,00</strong>
-                    </p>
-                </div>
-            </div>
-
-            <!-- Adicione mais cards conforme necessário -->
         </section>
     </main>
 
