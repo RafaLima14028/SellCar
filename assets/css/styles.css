@@ -3,7 +3,6 @@ body {
   padding: 0;
   background-color: #ecedf2;
   font-family: "Poppins", Arial, sans-serif;
-
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -107,7 +106,6 @@ main {
   border-radius: 30px;
   overflow: hidden;
   margin-left: 15px;
-  
 }
 
 #container-card a {
@@ -120,7 +118,6 @@ main {
   width: 100%;
   height: 200px;
   overflow: hidden;
-
   box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
 }
 
@@ -279,3 +276,18 @@ footer {
   width: 100%;
 }
 
+/* Media query para telas menores */
+@media (max-width: 768px) {
+  #form-busca {
+    flex-direction: column; /* Altera a direção do flex para coluna */
+  }
+
+  .campo-busca select {
+    width: 100%; /* Faz com que os selects ocupem 100% da largura */
+  }
+
+  #form-busca button {
+    width: 100%; /* Faz com que o botão ocupe 100% da largura */
+    margin-top: 10px; /* Ajusta a margem superior do botão */
+  }
+}
