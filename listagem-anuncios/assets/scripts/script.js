@@ -13,3 +13,6 @@ function menu_hamburguer() {
     header.classList.add("menu-aberto");
   }
 }
+
+const menuHamburguer = document.getElementById("menu-hamburguer");
+menuHamburguer.onclick = menu_hamburguer;

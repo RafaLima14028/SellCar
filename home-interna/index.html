@@ -55,7 +55,6 @@
     <main>
         <section id="painel-busca">
             <h2>Buscar Veículos</h2>
-
             <form id="form-busca">
                 <div class="campo-busca">
                     <label for="marca">Marca:</label>
@@ -97,119 +96,41 @@
         <section id="lista-anuncios">
             <h2 class="h2-resultados">Resultados da Busca</h2>
 
-            <div id="container-cards">
-                <div class="container-card">
-                    <a href="../detalhes-anuncio/index.html">
-                        <div class="container-img">
-                            <img src="assets/img/new-city-hatchback.png" alt="Imagem do veículo">
-                        </div>
-                    </a>
+            <section id="container-card">
+                <h6>Cards</h6>
 
-                    <div class="detalhes-carro">
-                        <div class="detalhes-carro-esquerda">
-                            <p>Marca: Honda</p>
-                            <p>Modelo: City</p>
-                            <p>Ano: 2025</p>
-                        </div>
+                <a href="../detalhes-anuncio/index.html">
+                    <div id="container-img">
+                        <img src="assets/img/new-city-hatchback.png" alt="Imagem do veículo">
+                    </div>
+                </a>
 
-                        <div class="detalhes-carro-direto">
-                            <div class="detalhes-carro-direto-icones">
-                                <a href="../listagem-interesses/index.html">
-                                    <span class="material-icons mode_comment">
-                                        mode_comment
-                                    </span>
-                                </a>
-
-                                <a href="#">
-                                    <span class="material-icons mode_comment">
-                                        delete
-                                    </span>
-                                </a>
-                            </div>
-
-                            <div class="detalhes-carro-direto-cidade">
-                                <p>Em Uberlândia</p>
-                            </div>
-                        </div>
+                <div id="detalhes-carro">
+                    <div id="detalhes-carro-esquerda">
+                        <p>Marca: Honda</p>
+                        <p>Modelo: City</p>
+                        <p>Ano: 2025</p>
                     </div>
 
-                    <div class="detalhes-carro-valor">
-                        <p>
-                            <strong>R$ 120.000,00</strong>
-                        </p>
+                    <div id="detalhes-carro-direto-cidade">
+                        <p>Em Uberlândia</p>
                     </div>
                 </div>
-            </div>
+
+                <div id="detalhes-carro-valor">
+                    <p>
+                        <strong>R$ 120.000,00</strong>
+                    </p>
+                </div>
+            </section>
         </section>
     </main>
 
     <footer class="rodape">
-        &copy; 2025 SellCar. Todos os direitos reservados.
+        <strong>© 2025 SellCar. Todos os direitos reservados.</strong>
     </footer>
 
     <script src="assets/scripts/scripts.js"></script>
-
-    <!-- <script>
-
-        document.addEventListener("DOMContentLoaded", function () {
-            document.getElementById("buscar").addEventListener("click", function () {
-                let marcaSelecionada = document.getElementById("marca").value;
-                let modeloSelecionado = document.getElementById("modelo").value;
-                let anoSelecionado = document.getElementById("ano").value;
-                let localizacaoSelecionada = document.getElementById("localizacao").value;
-
-                // Verifica se todos os campos estão preenchidos
-                if (!marcaSelecionada || !modeloSelecionado || !anoSelecionado || !localizacaoSelecionada) {
-                    alert("Por favor, selecione todos os filtros.");
-                    return;
-                }
-
-                // Verifco se ja houve uma busca anteriormente para limpar a pesquisa
-                document.getElementById("anuncios-container").innerHTML = "";
-
-                // Criar um card dinamicamente
-                let cardHtml = `
-            <div class="card">
-                <img src="../assets/img/new-city-hatchback.png" alt="Modelo de Carro">
-                <p><strong>Marca:</strong> ${marcaSelecionada}</p>
-                <p><strong>Modelo:</strong> ${modeloSelecionado}</p>
-                <p><strong>Ano:</strong> ${anoSelecionado}</p>
-                <p><strong>Em:</strong> ${localizacaoSelecionada}</p>
-                <p class="preco">R$ 120.000,00</p>
-            </div>
-        `;
-
-                let cardHtml2 = `
-            <div class="card">
-                <img src="../assets/img/new-city-hatchback.png" alt="Modelo de Carro">
-                <p><strong>Marca:</strong> ${marcaSelecionada}</p>
-                <p><strong>Modelo:</strong> ${modeloSelecionado}</p>
-                <p><strong>Ano:</strong> ${anoSelecionado}</p>
-                <p><strong>Em:</strong> ${localizacaoSelecionada}</p>
-                <p class="preco">R$ 150.000,00</p>
-            </div>
-        `;
-
-                let cardHtml3 = `
-            <div class="card">
-                <img src="../assets/img/new-city-hatchback.png" alt="Modelo de Carro">
-                <p><strong>Marca:</strong> ${marcaSelecionada}</p>
-                <p><strong>Modelo:</strong> ${modeloSelecionado}</p>
-                <p><strong>Ano:</strong> ${anoSelecionado}</p>
-                <p><strong>Em:</strong> ${localizacaoSelecionada}</p>
-                <p class="preco">R$ 170.000,00</p>
-            </div>
-        `;
-
-                // Adiciona o card dentro da div "anuncios-container"
-                document.getElementById("anuncios-container").innerHTML += cardHtml;
-                document.getElementById("anuncios-container").innerHTML += cardHtml2;
-                document.getElementById("anuncios-container").innerHTML += cardHtml3;
-            });
-        });
-
-    </script> -->
-
 </body>
 
 </html>

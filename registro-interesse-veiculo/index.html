@@ -29,6 +29,38 @@
     </header>
 
     <main>
+        <section class="container-card">
+            <h6>Carro</h6>
+
+            <a href="../detalhes-anuncio/index.html">
+                <div class="container-img">
+                    <img src="assets/img/new-city-hatchback.png" alt="Imagem do veículo">
+                </div>
+            </a>
+
+            <div class="container-detalhes-carro">
+                <div class="detalhes-carro">
+                    <div class="detalhes-carro-esquerda">
+                        <p>Marca: Honda</p>
+                        <p>Modelo: City</p>
+                        <p>Ano: 2025</p>
+                    </div>
+
+                    <div class="detalhes-carro-direto">
+                        <div class="detalhes-carro-direto-cidade">
+                            <p>Em Uberlândia</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="detalhes-carro-valor">
+                    <p>
+                        <strong>R$ 120.000,00</strong>
+                    </p>
+                </div>
+            </div>
+        </section>
+
         <form enctype="multipart/form-data" action="registraInteresse.php" method="post">
             <div>
                 <input type="text" placeholder="Nome Completo" id="nome" name="nome"
@@ -45,7 +77,7 @@
                     class="input-sombra input-borda-mensagem" rows="5" required></textarea>
             </div>
 
-            <input type="submit" value="Enviar Interesse" name="btn-enviar" id="btn-enviar">
+            <input type="submit" value="Enviar" name="btn-enviar" id="btn-enviar">
         </form>
     </main>
 

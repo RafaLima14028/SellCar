@@ -1,49 +1,52 @@
+<!-- PÁGINA DE CADASTRO DE USUÁRIO (ANUNCIANTE) -->
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SellCar</title>
+    <title>Cadastro de Usuário - SellCar</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 
 <body>
-
-    <header class="cabecalho">
-        <img src="../assets/img/sellcar-500x500.png" alt="logo da empresa">
+    <header>
+        <nav>
+            <a href="index.html">
+                <img src="assets/img/sellcar-500x500.png" alt="Logo da Empresa" id="img-logo">
+            </a>
+        </nav>
     </header>
 
-    <main class="container">
+    <main>
+        <form enctype="multipart/form-data" action="cadastraUsuario.php" method="post">
+            <div>
+                <input type="email" placeholder="E-mail" id="email" name="email"
+                    class="input-sombra input-borda input-dados" autocomplete="off" required>
+            </div>
 
-        <div class="container-login">
-            <form action="login_usuario.php" method="post" class="teste">
-                <div class="container-itens">
-                    <label for="email"></label>
-                    <input type="email" id="email" name="email" required placeholder="E-mail" autofocus>
-                </div>
-
-                <div class="container-itens">
-                    <label for="senha"></label>
-                    <input type="password" id="senha" name="senha" required placeholder="Senha">
-                </div>
-                
-                <button type="button" class="botao_login" onclick="window.location.href='../home-interna/index.html'"> Logar </button>
-            </form>
-        </div>
-
+            <div>
+                <input type="password" placeholder="Senha" id="senha" name="senha"
+                    class="input-sombra input-borda input-dados" autocomplete="off" required minlength="6">
+            </div>
+            
+            <input type="submit" value="Logar" name="btn-enviar" id="btn-enviar">
+        </form>
     </main>
 
-    <footer class="rodape">
-        &copy; 2025 SellCar. Todos os direitos reservados.
+    <footer>
+        <strong>© 2025 SellCar. Todos os direitos reservados.</strong>
     </footer>
-
 </body>
 
 </html>

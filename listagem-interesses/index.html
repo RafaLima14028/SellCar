@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SellCar</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,108 +12,165 @@
         href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
+    <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 
 <body>
-
     <header class="cabecalho">
-        <div class="container-cabecalho">
-            <img src="../assets/img/sellcar-500x500.png" alt="Logo da empresa">
+        <nav>
+            <a href="../index.html" id="img-logo">
+                <img src="assets/img/sellcar-500x500.png" width="70" height="70" alt="Logo da Empresa">
+            </a>
 
-            <nav>
-                <ul>
-                    <li class="busca">
-                        <span class="material-icons">chat_bubble_outline</span>
-                        <a href="index.html">Interesse</a>
-                    </li>
-                    <li> <a href="../criacao-anuncios/index.html"> Anunciar</a></li>
-                    <li> <a href="../listagem-anuncios/index.html"> Anúncios</a></li>
-                    <li> <a href="../login-usuarios/index.html">Sair</a> </li>
-                </ul>
-            </nav>
-        </div>
+            <a class="a-menu-hamburguer" onclick="menu_hamburguer()">
+                <span class="material-icons menu-hamburguer" id="menu-hamburguer">
+                    menu
+                </span>
+            </a>
 
+            <ul id="nav-list">
+                <li>
+                    <a href="../listagem-interesses/index.html">
+                        <span class="material-icons mode_comment">
+                            mode_comment
+                        </span>
+                        Interesses
+                    </a>
+                </li>
+                <li>
+                    <a href="../criacao-anuncios/index.html">Anunciar</a>
+                </li>
+                <li>
+                    <a href="../listagem-anuncios/index.html">Anúncios</a>
+                </li>
+                <li>
+                    <a href="#">Sair</a>
+                </li>
+            </ul>
+        </nav>
     </header>
 
     <main>
-        <div class="anuncio-detalhes">
-            <div class="card">
-                <div class="card-imagem">
-                    <img src="../assets/img/new-city-hatchback.png" alt="Modelo do Carro">
-                </div>
+        <section class="container-card">
+            <h6>Carro</h6>
 
-                <div class="card-texto">
-                    <p class="paragrafo-card"><strong>Marca:</strong> X</p>
-                    <p><strong>Modelo:</strong> Y</p>
-                    <div class="card-texto-tipo">
-                        <p class="paragrafo-card"><strong>Ano:</strong> 2025</p>
-                        <p><strong>Em:</strong> Uberlândia</p>
+            <a href="../detalhes-anuncio/index.html">
+                <div class="container-img">
+                    <img src="assets/img/new-city-hatchback.png" alt="Imagem do veículo">
+                </div>
+            </a>
+
+            <div class="container-detalhes-carro">
+                <div class="detalhes-carro">
+                    <div class="detalhes-carro-esquerda">
+                        <p>Marca: Honda</p>
+                        <p>Modelo: City</p>
+                        <p>Ano: 2025</p>
                     </div>
-                    <p class="preco">R$ 120.000,00</p>
+
+                    <div class="detalhes-carro-direto">
+                        <div class="detalhes-carro-direto-cidade">
+                            <p>Em Uberlândia</p>
+                        </div>
+                    </div>
                 </div>
 
-            </div>
-        </div>
-
-        <section class="interesses">
-            <div class="container-interesse">
-                <p><strong>Nome:</strong> Fulano</p>
-                <p><strong>Telefone:</strong> (11) 9999-9999</p>
-                <p><strong>Mensagem:</strong> Gostaria de ver o veículo presencialmente.</p>
-                
-                <p class="paragrafo"><strong>Nome:</strong> Fulano</p>
-                <p><strong>Telefone:</strong> (11) 9999-9999</p>
-                <p><strong>Mensagem:</strong> Gostaria de ver o veículo presencialmente.</p>
-                
-                <p class="paragrafo"><strong>Nome:</strong> Fulano</p>
-                <p><strong>Telefone:</strong> (11) 9999-9999</p>
-                <p><strong>Mensagem:</strong> Gostaria de ver o veículo presencialmente.</p>
+                <div class="detalhes-carro-valor">
+                    <p>
+                        <strong>R$ 120.000,00</strong>
+                    </p>
+                </div>
             </div>
         </section>
 
-        <div class="anuncio-detalhes">
-            <div class="card">
-                <div class="card-imagem">
-                    <img src="../assets/img/new-city-hatchback.png" alt="Modelo do Carro">
-                </div>
-
-                <div class="card-texto">
-                    <p class="paragrafo-card"><strong>Marca:</strong> X</p>
-                    <p><strong>Modelo:</strong> Y</p>
-                    <div class="card-texto-tipo">
-                        <p class="paragrafo-card"><strong>Ano:</strong> 2025</p>
-                        <p><strong>Em:</strong> Uberlândia</p>
-                    </div>
-                    <p class="preco">R$ 120.000,00</p>
-                </div>
-
-            </div>
-        </div>
-
         <section class="interesses">
+            <h6>Interesses</h6>
+
             <div class="container-interesse">
-                <p><strong>Nome:</strong> Fulano</p>
-                <p><strong>Telefone:</strong> (11) 9999-9999</p>
-                <p><strong>Mensagem:</strong> Gostaria de ver o veículo presencialmente.</p>
-                
-                <p class="paragrafo"><strong>Nome:</strong> Fulano</p>
-                <p><strong>Telefone:</strong> (11) 9999-9999</p>
-                <p><strong>Mensagem:</strong> Gostaria de ver o veículo presencialmente.</p>
-                
-                <p class="paragrafo"><strong>Nome:</strong> Fulano</p>
-                <p><strong>Telefone:</strong> (11) 9999-9999</p>
-                <p><strong>Mensagem:</strong> Gostaria de ver o veículo presencialmente.</p>
+                <div class="paragrafo">
+                    <p><strong>Nome:</strong> Fulano</p>
+                    <p><strong>Telefone:</strong> (11) 9999-9999</p>
+                    <p><strong>Mensagem:</strong> Gostaria de ver o veículo presencialmente.</p>
+                </div>
+
+                <div class="paragrafo">
+                    <p><strong>Nome:</strong> Fulano</p>
+                    <p><strong>Telefone:</strong> (11) 9999-9999</p>
+                    <p><strong>Mensagem:</strong> Gostaria de ver o veículo presencialmente.</p>
+                </div>
+
+                <div class="paragrafo">
+                    <p><strong>Nome:</strong> Fulano</p>
+                    <p><strong>Telefone:</strong> (11) 9999-9999</p>
+                    <p><strong>Mensagem:</strong> Gostaria de ver o veículo presencialmente.</p>
+                </div>
             </div>
         </section>
 
+        <section class="container-card">
+            <h6>Carro</h6>
+
+            <a href="../detalhes-anuncio/index.html">
+                <div class="container-img">
+                    <img src="assets/img/new-city-hatchback.png" alt="Imagem do veículo">
+                </div>
+            </a>
+
+            <div class="container-detalhes-carro">
+                <div class="detalhes-carro">
+                    <div class="detalhes-carro-esquerda">
+                        <p>Marca: Honda</p>
+                        <p>Modelo: City</p>
+                        <p>Ano: 2025</p>
+                    </div>
+
+                    <div class="detalhes-carro-direto">
+                        <div class="detalhes-carro-direto-cidade">
+                            <p>Em Uberlândia</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="detalhes-carro-valor">
+                    <p>
+                        <strong>R$ 120.000,00</strong>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="interesses">
+            <h6>Interesses</h6>
+
+            <div class="container-interesse">
+                <div class="paragrafo">
+                    <p><strong>Nome:</strong> Fulano</p>
+                    <p><strong>Telefone:</strong> (11) 9999-9999</p>
+                    <p><strong>Mensagem:</strong> Gostaria de ver o veículo presencialmente.</p>
+                </div>
+
+                <div class="paragrafo">
+                    <p><strong>Nome:</strong> Fulano</p>
+                    <p><strong>Telefone:</strong> (11) 9999-9999</p>
+                    <p><strong>Mensagem:</strong> Gostaria de ver o veículo presencialmente.</p>
+                </div>
+
+                <div class="paragrafo">
+                    <p><strong>Nome:</strong> Fulano</p>
+                    <p><strong>Telefone:</strong> (11) 9999-9999</p>
+                    <p><strong>Mensagem:</strong> Gostaria de ver o veículo presencialmente.</p>
+                </div>
+            </div>
+        </section>
     </main>
 
-    <footer class="rodape">
-        &copy; 2025 SellCar. Todos os direitos reservados.
+    <footer>
+        <strong>© 2025 SellCar. Todos os direitos reservados.</strong>
     </footer>
 
+    <script src="assets/script/script.js"></script>
 </body>
 
 </html>
