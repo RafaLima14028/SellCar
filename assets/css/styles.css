@@ -107,6 +107,7 @@ main {
   border-radius: 30px;
   overflow: hidden;
   margin-left: 15px;
+  
 }
 
 #container-card a {
@@ -230,7 +231,7 @@ footer {
 #painel-busca {
   background-color: #ffffff;
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 25px;
   margin-bottom: 20px;
   box-shadow: 0 2px 7px rgba(0, 0, 0, 0.1);
 }
@@ -253,7 +254,7 @@ footer {
 
 .campo-busca select {
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 25px;
   border: 1px solid #ccc;
 }
 
@@ -262,10 +263,12 @@ footer {
   background-color: #520002;
   color: #ffffff;
   border: none;
-  border-radius: 5px;
+  border-radius: 25px;
   cursor: pointer;
   font-size: 1em;
   font-weight: 600;
+  max-height: 50px;
+  margin-top: 25px;
 }
 
 #form-busca button:hover {
@@ -275,3 +278,4 @@ footer {
 #lista-anuncios {
   width: 100%;
 }
+
