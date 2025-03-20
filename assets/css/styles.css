@@ -102,9 +102,12 @@ main {
 
 #container-card {
   height: 400px;
+  max-width: 300px;
   background-color: #ffffff;
   border-radius: 30px;
   overflow: hidden;
+  margin-left: 15px;
+  
 }
 
 #container-card a {
@@ -274,12 +277,3 @@ footer {
   width: 100%;
 }
 
-#container-cards {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  row-gap: 20px;
-  column-gap: 30px;
-}
