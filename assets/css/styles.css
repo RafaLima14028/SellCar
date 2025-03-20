@@ -23,6 +23,12 @@ nav {
   display: inline-block;
 }
 
+.h2-resultados {
+  margin: 0 auto;
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
 .material-icons.menu-hamburguer {
   display: none;
 }
