@@ -1,11 +1,10 @@
-<!-- Página de Login -->
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SellCar</title>
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -16,26 +15,35 @@
 </head>
 
 <body>
-    <header>
-        <nav>
-            <a href="../index.html" id="img-logo">
-                <img src="assets/img/sellcar-500x500.png" width="70" height="70" alt="Logo da Empresa">
-            </a>
 
-            <ul id="nav-list">
-                <li><a href="cadastro-usuarios/index.html">Cadastrar-se</a></li>
-                <li><a href="login-usuarios/index.html">Logar</a></li>
-            </ul>
-        </nav>
+    <header class="cabecalho">
+        <img src="../assets/img/sellcar-500x500.png" alt="logo da empresa">
     </header>
 
-    <main>
+    <main class="container">
+
+        <div class="container-login">
+            <form action="login_usuario.php" method="post" class="teste">
+                <div class="container-itens">
+                    <label for="email"></label>
+                    <input type="email" id="email" name="email" required placeholder="E-mail" autofocus>
+                </div>
+
+                <div class="container-itens">
+                    <label for="senha"></label>
+                    <input type="password" id="senha" name="senha" required placeholder="Senha">
+                </div>
+                
+                <button type="button" class="botao_login" onclick="window.location.href='../home-interna/index.html'"> Logar </button>
+            </form>
+        </div>
 
     </main>
 
-    <footer>
-        <strong>© 2025 SellCar. Todos os direitos reservados.</strong>
+    <footer class="rodape">
+        &copy; 2025 SellCar. Todos os direitos reservados.
     </footer>
+
 </body>
 
 </html>

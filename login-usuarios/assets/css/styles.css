@@ -1,0 +1,129 @@
+/* Cores da Página */
+:root {
+    --branco-claro: #ffffff;
+    --branco-escuro: #ecedf2;
+    --vermelho-vinho: #520002;
+    --texto-preto: #000000;
+    --texto-branco: #ffffff;
+}
+
+body, html {
+    background-color: var(--branco-escuro);
+    padding: 0;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+.cabecalho {
+    background-color: var(--branco-claro);
+}
+
+.cabecalho img {
+    width: 80px;
+    margin-left: 30px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+}
+
+.container-login {
+    background-color: var(--branco-claro);
+    padding: 20px;
+    border-radius: 10px;
+    width: 100vh;
+}
+
+.container-itens {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+input,
+button {
+    width: 50vw;
+    box-sizing: border-box;
+    padding: 10px;
+    margin: 12px 0px;
+    border-radius: 50px;
+}
+
+.botao_login {
+    width: 150px;
+    margin: 12px auto;
+    display: block;
+    background-color: var(--vermelho-vinho);
+    color: var(--texto-branco);
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+.rodape {
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+    background-color: var(--branco-claro);
+    padding: 24px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+/* Estilos de Texto */
+.header-text {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+    letter-spacing: 1px;
+}
+
+.header-text-bold {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    letter-spacing: 1px;
+}
+
+.card-carro {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+
+.card-cidade {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+
+.detalhes-anuncio {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 36px;
+    letter-spacing: 1px;
+}
+
+.detalhes-anuncio-semi-bold {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 550;
+    font-size: 36px;
+    letter-spacing: 1px;
+}
+
+.footer-text {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    letter-spacing: 1px;
+}
