@@ -3,7 +3,7 @@ CREATE TABLE Anunciante
     id INT PRIMARY KEY auto_increment,
     nome VARCHAR(100) NOT NULL,
     cpf VARCHAR(15) UNIQUE NOT NULL,
-    email VARCHAR(100) UNIQUE NOT NOT,
+    email VARCHAR(100) UNIQUE NOT NULL,
     senhaHash VARCHAR(50) NOT NULL,
     telefone VARCHAR(20) UNIQUE NOT NULL
 ) ENGINE=InnoDB;
@@ -21,7 +21,8 @@ CREATE TABLE Anuncio
     dataHora TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     estado VARCHAR(50) NOT NULL,
     cidade VARCHAR(50) NOT NULL,
-    idAnunciante INT FOREIGN KEY REFERENCES Anunciante (id)
+    idAnunciante INT,
+    FOREIGN KEY (idAnunciante) REFERENCES Anunciante(id)
 ) ENGINE=InnoDB;
 
 
@@ -32,13 +33,15 @@ CREATE TABLE Interesse
     telfone VARCHAR(20) NOT NULL,
     mensagem VARCHAR(1000) NOT NULL,
     dataHora TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    idAnuncio INT FOREIGN KEY REFERENCES Anuncio (id)
+    idAnuncio INT,
+    FOREIGN KEY (idAnuncio) REFERENCES Anuncio(id)
 ) ENGINE=InnoDB;
 
 
 CREATE TABLE Foto
 (
-    idAnuncio INT FOREIGN KEY REFERENCES Anuncio (id),
-    nomeArqFoto VARCHAR(100) NOT NULL
+    idAnuncio INT,
+    nomeArqFoto VARCHAR(100) NOT NULL,
+    FOREIGN KEY (idAnuncio) REFERENCES Anuncio(id)
 ) ENGINE=InnoDB;
 

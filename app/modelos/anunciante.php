@@ -13,6 +13,6 @@ class Anunciante
 
         $stmt->execute([$nome, $cpf, $email, $senhaHash, $telefone]);
 
-        return $pdo->lastInserId();
+        return $pdo->lastInsertId();
     }
 }

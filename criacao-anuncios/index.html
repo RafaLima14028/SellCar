@@ -29,7 +29,7 @@
     </header>
 
     <main>
-        <form enctype="multipart/form-data" action="cadastraVeiculo.php" method="post">
+        <form enctype="multipart/form-data" action="../app/controlador.php?acao=criacaoAnuncios" method="post">
             <div>
                 <input type="text" placeholder="Marca" id="marca" name="marca"
                     class="input-sombra input-borda input-dados" autofocus autocomplete="off" required>
@@ -109,7 +109,7 @@
 
                 <label for="imgs-carro">Selecionar Imagens</label>
 
-                <input type="file" id="imgs-carro" name="imgs-carro" accept=".png, .jpg, .jpeg" multiple required>
+                <input type="file" id="imgs-carro" name="imgs-carro[]" accept=".png, .jpg, .jpeg" multiple required>
             </div>
 
             <input type="submit" value="Cadastrar" name="btn-enviar" id="btn-enviar">

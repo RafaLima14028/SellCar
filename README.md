@@ -109,3 +109,8 @@ Este projeto foi desenvolvido como parte de um trabalho de faculdade. Agradecemo
 - [Rafael](https://github.com/RafaLima14028)
 - [Gabriel](https://github.com/gkatog)
 - [Lucas](https://github.com/LucasDaniel1)
+
+<h2>Correções para fazer</h2>
+
+- Colocar o valor correto de ©
+- Colocar o label em inputs que não tem
