@@ -25,24 +25,24 @@ switch ($acao) {
         try {
             $pdo->beginTransaction();
 
-            $idAnunciante = 1;
+            $idAnunciante = 1; // Precisa vir da session
 
             $idAnuncio = Anuncio::Criar($pdo, $marca, $modelo, $ano, $cor, $quilometragem, $descricao, $valor, $estado, $cidade, $idAnunciante);
 
             $pasta_destino = "uploads/anuncios/" . $idAnuncio;
 
-            if (!file_exists($pasta_destino))
+            if (!is_dir($pasta_destino))
                 mkdir($pasta_destino, 0777, true);
 
-            foreach ($fotos['tmp-name'] as $index => $tmp_name) {
+            foreach ($fotos['tmp_name'] as $index => $tmp_name) {
                 $nome_original = basename($fotos['name'][$index]);
                 $extensao = pathinfo($nome_original, PATHINFO_EXTENSION);
-                $novo_nome = uniqid() . "." . $extensao;
+                $novo_nome = uniqid('img_', true) . "." . $extensao;
 
-                if (move_uploaded_file($tmp_name, "$pasta_destino/$novo_nome")) {
+                if (move_uploaded_file($tmp_name, $pasta_destino . '/' . $novo_nome)) {
                     Foto::Criar($pdo, $idAnuncio, $novo_nome);
                 } else {
-                    throw new Exception("Falha ao salvar o arquivo: $nome_original");
+                    throw new Exception("Falha ao salvar o arquivo: " . $nome_original);
                 }
             }
 
@@ -51,6 +51,7 @@ switch ($acao) {
             header("Location: ../index.html");
         } catch (Exception $e) {
             $pdo->rollBack();
+
             throw new Exception($e->getMessage());
         }
 

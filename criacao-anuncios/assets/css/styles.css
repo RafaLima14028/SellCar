@@ -163,6 +163,12 @@ select option {
   display: block;
   margin: 20px auto 0 auto;
   padding: 10px 30px;
+  opacity: 1;
+}
+
+#btn-enviar:disabled {
+  opacity: 0.3;
+  cursor: initial;
 }
 
 footer {

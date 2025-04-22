@@ -24,6 +24,6 @@ class Anuncio
 
         $stmt->execute([$marca, $modelo, $ano, $cor, $quilometragem, $descricao, $valor, $estado, $cidade, $idAnunciante]);
 
-        return $pdo->lastInserId();
+        return $pdo->lastInsertId();
     }
 }

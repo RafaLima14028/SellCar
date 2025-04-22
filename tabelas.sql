@@ -21,7 +21,7 @@ CREATE TABLE Anuncio
     dataHora TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     estado VARCHAR(50) NOT NULL,
     cidade VARCHAR(50) NOT NULL,
-    idAnunciante INT,
+    idAnunciante INT NOT NULL,
     FOREIGN KEY (idAnunciante) REFERENCES Anunciante(id)
 ) ENGINE=InnoDB;
 
