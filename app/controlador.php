@@ -3,11 +3,13 @@
 require "conexaoMysql.php";
 require "./modelos/anuncio.php";
 require "./modelos/foto.php";
-require "./modelos/Anunciante.php"; // Adicionei esta linha
+require "./modelos/anunciante.php";
+require "./config/session.php"; 
 
 $acao = $_GET['acao'] ?? '';
 
 $pdo = mysqlConnect();
+$session = new session();
 
 switch ($acao) {
     case "criacaoAnuncios":
@@ -130,4 +132,67 @@ switch ($acao) {
         http_response_code(404);
         echo json_encode(["status" => "error", "message" => "Ação não disponível"]);
         exit;
+    
+    case "loginUsuario":
+        header("Content-Type: application/json; charset=UTF-8");
+
+        if($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            http_response_code(405);
+            echo json_encode([
+                "status" => "error",
+                "message" => "Método não permitido"
+            ]);
+            exit;
+        }
+
+        try {
+            $data = json_decode(file_get_contents("php://input"), true);
+            
+            if(empty($data['email']) || empty($data['senha'])) {
+                throw new Exception("Dados incompletos");
+            }
+
+            $anunciante = new Anunciante($pdo);
+            $anunciante->email = $data['email'];
+            $anunciante->senha = $data['senha'];
+
+            $result = $anunciante->login();
+
+            if($result['status'] === "success") {
+                $session->start();
+                $_SESSION['user_id'] = $result['id'];
+                $_SESSION['logged_in'] = true;
+                $_SESSION['user_email'] = $data['email'];
+                
+                http_response_code(200);
+                echo json_encode([
+                    "status" => "success",
+                    "redirect" => "area_restrita.php"
+                ]);
+            } else {
+                http_response_code(401);
+                echo json_encode($result);
+            }
+
+        } catch (Exception $e) {
+            http_response_code(400);
+            echo json_encode([
+                "status" => "error",
+                "message" => $e->getMessage()
+            ]);
+        }
+        break;
+
+    case "logoutUsuario":
+        $session->start();
+        $session->destroy();
+        
+        echo json_encode([
+            "status" => "success",
+            "message" => "Logout realizado",
+            "redirect" => "index.html"
+        ]);
+        break;
+
+
 }

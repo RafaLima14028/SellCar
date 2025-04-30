@@ -73,5 +73,29 @@ class Anunciante {
 
         return false;
     }
+
+    public function login() {
+        $query = "SELECT id, senhaHash FROM Anunciante WHERE email = :email LIMIT 1";
+        $stmt = $this->conn->prepare($query);
+        
+        $stmt->bindParam(":email", $this->email);
+        $stmt->execute();
+        
+        if($stmt->rowCount() > 0) {
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            
+            if(password_verify($this->senha, $row['senhaHash'])) {
+                return [
+                    "status" => "success",
+                    "id" => $row['id']
+                ];
+            }
+        }
+        
+        return [
+            "status" => "error",
+            "message" => "Credenciais inválidas"
+        ];
+    }
 }
 ?>
