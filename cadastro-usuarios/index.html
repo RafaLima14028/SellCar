@@ -62,6 +62,33 @@
     <footer>
         <strong>© 2025 SellCar. Todos os direitos reservados.</strong>
     </footer>
+    <script>
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const data = {};
+            formData.forEach((value, key) => data[key] = value);
+            
+            fetch('cadastraUsuario.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if(data.message) {
+                    alert(data.message);
+                    if(response.ok) {
+                        window.location.href = 'login.html'; // Redireciona após cadastro
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                alert('Ocorreu um erro ao processar seu cadastro.');
+            });
+        });
+    </script>
 </body>
 
 </html>

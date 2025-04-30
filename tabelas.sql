@@ -4,7 +4,7 @@ CREATE TABLE Anunciante
     nome VARCHAR(100) NOT NULL,
     cpf VARCHAR(15) UNIQUE NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
-    senhaHash VARCHAR(50) NOT NULL,
+    senhaHash VARCHAR(255) NOT NULL,
     telefone VARCHAR(20) UNIQUE NOT NULL
 ) ENGINE=InnoDB;
 
