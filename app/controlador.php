@@ -4,12 +4,10 @@ require "conexaoMysql.php";
 require "./modelos/anuncio.php";
 require "./modelos/foto.php";
 require "./modelos/anunciante.php";
-require "./config/session.php";
 
 $acao = $_GET['acao'] ?? '';
 
 $pdo = mysqlConnect();
-$session = new session();
 
 switch ($acao) {
     case "criacaoAnuncios":
@@ -106,54 +104,37 @@ switch ($acao) {
 
         break;
 
-    // case "loginUsuario":
-    //     header("Content-Type: application/json; charset=UTF-8");
+    case "loginUsuario":
+        header("Content-Type: application/json; charset=UTF-8");
 
-    //     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    //         http_response_code(405);
-    //         echo json_encode([
-    //             "status" => "error",
-    //             "message" => "Método não permitido"
-    //         ]);
-    //         exit;
-    //     }
+        try {
+            $email = $_POST["email"] ?? '';
+            $senha = $_POST["senha"] ?? '';
 
-    //     try {
-    //         $data = json_decode(file_get_contents("php://input"), true);
+            $resultado = Anunciante::login($pdo, $email, $senha);
 
-    //         if (empty($data['email']) || empty($data['senha'])) {
-    //             throw new Exception("Dados incompletos");
-    //         }
+            if ($resultado["status"] == "success") {
+                session_start();
 
-    //         $anunciante = new Anunciante($pdo);
-    //         $anunciante->email = $data['email'];
-    //         $anunciante->senha = $data['senha'];
+                $_SESSION['user_id'] = $resultado['id'];
 
-    //         $result = $anunciante->login();
+                http_response_code(200);
+                echo json_encode([
+                    "status" => "success"
+                ]);
+            } else {
+                http_response_code(401);
+                echo json_encode($resultado);
+            }
+        } catch (Exception $e) {
+            http_response_code(400);
+            echo json_encode([
+                "status" => "error",
+                "message" => $e->getMessage()
+            ]);
+        }
 
-    //         if ($result['status'] === "success") {
-    //             $session->start();
-    //             $_SESSION['user_id'] = $result['id'];
-    //             $_SESSION['logged_in'] = true;
-    //             $_SESSION['user_email'] = $data['email'];
-
-    //             http_response_code(200);
-    //             echo json_encode([
-    //                 "status" => "success",
-    //                 "redirect" => "area_restrita.php"
-    //             ]);
-    //         } else {
-    //             http_response_code(401);
-    //             echo json_encode($result);
-    //         }
-    //     } catch (Exception $e) {
-    //         http_response_code(400);
-    //         echo json_encode([
-    //             "status" => "error",
-    //             "message" => $e->getMessage()
-    //         ]);
-    //     }
-    //     break;
+        break;
 
     // case "logoutUsuario":
     //     $session->start();

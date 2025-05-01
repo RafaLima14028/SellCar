@@ -49,28 +49,29 @@ class Anunciante
     //     return false;
     // }
 
-    // public function login()
-    // {
-    //     $query = "SELECT id, senhaHash FROM Anunciante WHERE email = :email LIMIT 1";
-    //     $stmt = $this->conn->prepare($query);
+    public static function login($pdo, $email, $senha)
+    {
+        $stmt = $pdo->prepare(
+            <<<SQL
+            SELECT id, senhaHash FROM Anunciante 
+            WHERE email = ?;
+            SQL
+        );
 
-    //     $stmt->bindParam(":email", $this->email);
-    //     $stmt->execute();
+        $stmt->execute([$email]);
 
-    //     if ($stmt->rowCount() > 0) {
-    //         $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        while ($row = $stmt->fetch()) {
+            if (password_verify($senha, $row["senhaHash"])) {
+                return [
+                    "status" => "success",
+                    "id" => $row["id"]
+                ];
+            }
+        }
 
-    //         if (password_verify($this->senha, $row['senhaHash'])) {
-    //             return [
-    //                 "status" => "success",
-    //                 "id" => $row['id']
-    //             ];
-    //         }
-    //     }
-
-    //     return [
-    //         "status" => "error",
-    //         "message" => "Credenciais inválidas"
-    //     ];
-    // }
+        return [
+            "status" => "error",
+            "message" => "Credenciais inválidas"
+        ];
+    }
 }

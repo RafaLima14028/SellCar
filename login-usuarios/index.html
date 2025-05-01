@@ -29,7 +29,7 @@
     </header>
 
     <main>
-        <form enctype="multipart/form-data" action="cadastraUsuario.php" method="post">
+        <form action="../app/controlador.php?acao=" method="post">
             <div>
                 <input type="email" placeholder="E-mail" id="email" name="email"
                     class="input-sombra input-borda input-dados" autocomplete="off" required>
@@ -39,16 +39,16 @@
                 <input type="password" placeholder="Senha" id="senha" name="senha"
                     class="input-sombra input-borda input-dados" autocomplete="off" required minlength="6">
             </div>
-            
+
             <input type="submit" value="Logar" name="btn-enviar" id="btn-enviar">
         </form>
     </main>
 
-    <script src="assets/js/auth.js"></script>
-
     <footer>
         <strong>© 2025 SellCar. Todos os direitos reservados.</strong>
     </footer>
+
+    <script src="assets/js/auth.js"></script>
 </body>
 
 </html>

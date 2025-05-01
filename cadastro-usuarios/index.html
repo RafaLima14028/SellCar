@@ -72,44 +72,24 @@
             );
             const data = {};
 
-            // formData.forEach((value, key) => data[key] = value);
-
-            console.log(formData);
-
             let response = await fetch('../app/controlador.php?acao=cadastroUsuario', {
                 method: 'POST',
                 body: formData
             })
 
             if (!response.ok) {
-                let dados = await response.json();
-
-                console.log(dados);
-
-                throw new Error("Falha inesperada: " + response.status);
+                alert(dados["Erro no cadastro"]);
             }
 
             let dados = await response.json();
 
-            if (dados["status"] === "error")
-                console.log("Ocorreu um erro")
+            if (dados["status"] === "error") {
+                alert(dados["Erro no cadastro"]);
+            }
 
-            console.log(dados);
+            alert("Cadastro realizado com sucesso!");
 
-
-            // .then(response => response.json())
-            // .then(data => {
-            //     if(data.message) {
-            //         alert(data.message);
-            //         if(response.ok) {
-            //             window.location.href = 'login.html'; // Redireciona após cadastro
-            //         }
-            //     }
-            // })
-            // .catch(error => {
-            //     console.error('Erro:', error);
-            //     alert('Ocorreu um erro ao processar seu cadastro.');
-            // });
+            window.location.href = "../index.html";
         });
     </script>
 </body>
