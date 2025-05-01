@@ -1,63 +1,31 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const loginForm = document.querySelector("form");
+const loginForm = document.querySelector("form");
 
-  loginForm.addEventListener("submit", async function (e) {
-    e.preventDefault();
+loginForm.addEventListener("submit", async function (e) {
+  e.preventDefault();
 
-    const email = document.getElementById("email").value;
-    const senha = document.getElementById("senha").value;
+  let formData = new FormData(loginForm);
 
-    const formData = new FormData(document.querySelector("form"));
+  console.log("Email:", document.querySelector("#email").value);
+  console.log("Senha:", document.querySelector("#senha").value);
 
-    fetch("../../app/controlador.php?acao=loginUsuario", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: formData,
-    });
-
-    
-
-    //   .then((response) => {
-    //     if (!response.ok) {
-    //       throw response;
-    //     }
-    //     return response.json();
-    //   })
-    //   .then((data) => {
-    //     if (data.status === "success") {
-    //       window.location.href = "dashboard.php"; // Redireciona para área restrita
-    //     } else {
-    //       showError(data.message || "Erro durante o login");
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     if (typeof error.json === "function") {
-    //       error.json().then((errorData) => {
-    //         showError(errorData.message || "Erro durante o login");
-    //       });
-    //     } else {
-    //       showError("Erro durante o login");
-    //     }
-    //   });
+  let response = await fetch("../../../app/controlador.php?acao=loginUsuario", {
+    method: "POST",
+    body: formData,
   });
 
-  function showError(message) {
-    // Remove mensagens de erro anteriores
-    const oldError = document.querySelector(".error-message");
-    if (oldError) oldError.remove();
-
-    // Cria nova mensagem de erro
-    const errorElement = document.createElement("div");
-    errorElement.className = "error-message";
-    errorElement.style.color = "red";
-    errorElement.style.margin = "10px 0";
-    errorElement.style.textAlign = "center";
-    errorElement.textContent = message;
-
-    // Insere antes do botão de submit
-    const submitButton = document.getElementById("btn-enviar");
-    submitButton.parentNode.insertBefore(errorElement, submitButton);
+  if (!response.ok) {
+    alert("Erro no login");
+    return;
   }
+
+  let dados = await response.json();
+
+  if (dados["status"] !== "success") {
+    alert(dados["message"]);
+    return;
+  }
+
+  alert("Login realizado com sucesso");
+
+  window.location.href = "../../../home-interna/index.html";
 });

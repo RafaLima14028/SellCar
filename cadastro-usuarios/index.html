@@ -70,12 +70,11 @@
             const formData = new FormData(
                 document.querySelector("form")
             );
-            const data = {};
 
             let response = await fetch('../app/controlador.php?acao=cadastroUsuario', {
                 method: 'POST',
                 body: formData
-            })
+            });
 
             if (!response.ok) {
                 alert("Erro no cadastro");

@@ -17,50 +17,23 @@ class Anunciante
         return $pdo->lastInsertId();
     }
 
-    // public function emailExiste()
-    // {
-    //     $query = "SELECT id FROM " . $this->table_name . " WHERE email = ? LIMIT 0,1";
-    //     $stmt = $this->conn->prepare($query);
-    //     $this->email = htmlspecialchars(strip_tags($this->email));
-    //     $stmt->bindParam(1, $this->email);
-    //     $stmt->execute();
-    //     $num = $stmt->rowCount();
-
-    //     if ($num > 0) {
-    //         return true;
-    //     }
-
-    //     return false;
-    // }
-
-    // public function cpfExiste()
-    // {
-    //     $query = "SELECT id FROM " . $this->table_name . " WHERE cpf = ? LIMIT 0,1";
-    //     $stmt = $this->conn->prepare($query);
-    //     $this->cpf = htmlspecialchars(strip_tags($this->cpf));
-    //     $stmt->bindParam(1, $this->cpf);
-    //     $stmt->execute();
-    //     $num = $stmt->rowCount();
-
-    //     if ($num > 0) {
-    //         return true;
-    //     }
-
-    //     return false;
-    // }
-
     public static function login($pdo, $email, $senha)
     {
         $stmt = $pdo->prepare(
             <<<SQL
-            SELECT id, senhaHash FROM Anunciante 
-            WHERE email = ?;
+            SELECT id, senhaHash
+            FROM Anunciante
+            WHERE email = ?
             SQL
         );
 
         $stmt->execute([$email]);
 
+        header("Info: " . $stmt->rowCount() . " email: " . $email);
+
         while ($row = $stmt->fetch()) {
+            header("Info1: Entrou no while");
+
             if (password_verify($senha, $row["senhaHash"])) {
                 return [
                     "status" => "success",
