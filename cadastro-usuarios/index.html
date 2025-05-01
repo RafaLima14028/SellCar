@@ -29,15 +29,15 @@
     </header>
 
     <main>
-        <form enctype="multipart/form-data" action="cadastraUsuario.php" method="post">
+        <form action="../app/controlador.php?acao=cadastroUsuario" method="post">
             <div>
                 <input type="text" placeholder="Nome Completo" id="nome" name="nome"
                     class="input-sombra input-borda input-dados" autofocus autocomplete="off" required>
             </div>
 
             <div>
-                <input type="text" placeholder="CPF" id="cpf" name="cpf"
-                    class="input-sombra input-borda input-dados" autocomplete="off" required minlength="11" maxlength="11">
+                <input type="text" placeholder="CPF" id="cpf" name="cpf" class="input-sombra input-borda input-dados"
+                    autocomplete="off" required minlength="11" maxlength="11">
             </div>
 
             <div>
@@ -62,31 +62,54 @@
     <footer>
         <strong>© 2025 SellCar. Todos os direitos reservados.</strong>
     </footer>
+
     <script>
-        document.querySelector('form').addEventListener('submit', function(e) {
+        document.querySelector('form').addEventListener('submit', async function (e) {
             e.preventDefault();
-            
-            const formData = new FormData(this);
+
+            const formData = new FormData(
+                document.querySelector("form")
+            );
             const data = {};
-            formData.forEach((value, key) => data[key] = value);
-            
-            fetch('cadastraUsuario.php', {
+
+            // formData.forEach((value, key) => data[key] = value);
+
+            console.log(formData);
+
+            let response = await fetch('../app/controlador.php?acao=cadastroUsuario', {
                 method: 'POST',
                 body: formData
             })
-            .then(response => response.json())
-            .then(data => {
-                if(data.message) {
-                    alert(data.message);
-                    if(response.ok) {
-                        window.location.href = 'login.html'; // Redireciona após cadastro
-                    }
-                }
-            })
-            .catch(error => {
-                console.error('Erro:', error);
-                alert('Ocorreu um erro ao processar seu cadastro.');
-            });
+
+            if (!response.ok) {
+                let dados = await response.json();
+
+                console.log(dados);
+
+                throw new Error("Falha inesperada: " + response.status);
+            }
+
+            let dados = await response.json();
+
+            if (dados["status"] === "error")
+                console.log("Ocorreu um erro")
+
+            console.log(dados);
+
+
+            // .then(response => response.json())
+            // .then(data => {
+            //     if(data.message) {
+            //         alert(data.message);
+            //         if(response.ok) {
+            //             window.location.href = 'login.html'; // Redireciona após cadastro
+            //         }
+            //     }
+            // })
+            // .catch(error => {
+            //     console.error('Erro:', error);
+            //     alert('Ocorreu um erro ao processar seu cadastro.');
+            // });
         });
     </script>
 </body>

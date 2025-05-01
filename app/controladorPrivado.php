@@ -1,13 +1,13 @@
 <?php
 
-require "conexaoMysql.php"
-require ""
+require "conexaoMysql.php";
+// require "";
 
 $acao = $_GET['acao'] ?? '';
 
 $pdo = mysqlConnect();
 
-switch ($acao){
+// switch ($acao){
 
-    case
-}
+//     case
+// }
