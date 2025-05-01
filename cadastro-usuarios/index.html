@@ -78,13 +78,15 @@
             })
 
             if (!response.ok) {
-                alert(dados["Erro no cadastro"]);
+                alert("Erro no cadastro");
+                return;
             }
 
             let dados = await response.json();
 
             if (dados["status"] === "error") {
-                alert(dados["Erro no cadastro"]);
+                alert("Erro no cadastro");
+                return;
             }
 
             alert("Cadastro realizado com sucesso!");
