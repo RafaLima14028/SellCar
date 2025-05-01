@@ -114,7 +114,11 @@ switch ($acao) {
             $resultado = Anunciante::login($pdo, $email, $senha);
 
             if ($resultado["status"] == "success") {
-                session_start();
+                session_set_cookie_params(['secure' => true]);
+
+                if (session_status() === PHP_SESSION_NONE) {
+                    session_start();
+                }
 
                 $_SESSION['user_id'] = $resultado['id'];
 
@@ -123,6 +127,8 @@ switch ($acao) {
                     "status" => "success"
                 ]);
             } else {
+                $_SESSION['user_id'] = null;
+
                 http_response_code(401);
                 echo json_encode($resultado);
             }
@@ -136,17 +142,41 @@ switch ($acao) {
 
         break;
 
-    // case "logoutUsuario":
-    //     $session->start();
-    //     $session->destroy();
+    case "logoutUsuario":
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
 
-    //     echo json_encode([
-    //         "status" => "success",
-    //         "message" => "Logout realizado",
-    //         "redirect" => "index.html"
-    //     ]);
-    //     break;
+        if ($_SESSION['user_id'] != null)
+            session_destroy();
 
+        echo json_encode([
+            "status" => "success",
+            "message" => "Logout realizado"
+        ]);
+
+        break;
+
+    case "estaLogado":
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        if ($_SESSION['user_id'] != null) {
+            http_response_code(200);
+
+            echo json_encode([
+                "status" => "logado"
+            ]);
+        } else {
+            http_response_code(401);
+
+            echo json_encode([
+                "status" => "deslogado"
+            ]);
+        }
+
+        break;
 
     default:
         http_response_code(404);

@@ -1,3 +1,36 @@
+// import { verifica_esta_logado } from "../assets/utils.js";
+
+document.addEventListener("DOMContentLoaded", async () => {
+  try {
+    let response = await fetch("../app/controlador.php?acao=estaLogado");
+
+    let dados = await response.json();
+
+    console.log(dados);
+
+    alert("chegou");
+
+    if (!response.ok) {
+      alert("Usuário deslogado");
+      console.log(dados);
+      // window.location.href = "./login-usuarios/index.html";
+      return;
+    }
+
+    // let dados = await response.json();
+
+    if (dados.status !== "logado") {
+      // window.location.href = "./login-usuarios/index.html";
+      console.log(dados);
+      return;
+    }
+
+    console.log("logado");
+  } catch (error) {
+    // window.location.href = "../login-usuarios/index.html";
+  }
+});
+
 window.onload = () => {
   const btnEnviar = document.getElementById("btn-enviar");
   const inputImgsCarros = document.getElementById("imgs-carro");

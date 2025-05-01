@@ -4,10 +4,7 @@ loginForm.addEventListener("submit", async function (e) {
   e.preventDefault();
 
   let formData = new FormData(loginForm);
-
-  console.log("Email:", document.querySelector("#email").value);
-  console.log("Senha:", document.querySelector("#senha").value);
-
+  
   let response = await fetch("../../../app/controlador.php?acao=loginUsuario", {
     method: "POST",
     body: formData,
