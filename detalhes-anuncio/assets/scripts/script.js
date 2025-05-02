@@ -5,17 +5,11 @@ document.addEventListener("DOMContentLoaded", () => {
         "../../../app/controlador.php?acao=estaLogado"
       );
 
-      let redirecionamento_url = "../../../login-usuarios/index.html";
-
-      if (!response.ok) {
-        alert("Usuário deslogado");
-        window.location.href = redirecionamento_url;
-        return;
-      }
+      let redirecionamento_url = "../../../home-interna/index.html";
 
       let dados = await response.json();
 
-      if (dados.status !== "logado") {
+      if (dados.status === "logado") {
         window.location.href = redirecionamento_url;
         return;
       }
