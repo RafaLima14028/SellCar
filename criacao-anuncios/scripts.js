@@ -1,33 +1,23 @@
-// import { verifica_esta_logado } from "../assets/utils.js";
-
 document.addEventListener("DOMContentLoaded", async () => {
   try {
     let response = await fetch("../app/controlador.php?acao=estaLogado");
 
-    let dados = await response.json();
-
-    console.log(dados);
-
-    alert("chegou");
+    let redirecionamento_url = "../login-usuarios/index.html";
 
     if (!response.ok) {
       alert("Usuário deslogado");
-      console.log(dados);
-      // window.location.href = "./login-usuarios/index.html";
+      window.location.href = redirecionamento_url;
       return;
     }
 
-    // let dados = await response.json();
+    let dados = await response.json();
 
     if (dados.status !== "logado") {
-      // window.location.href = "./login-usuarios/index.html";
-      console.log(dados);
+      window.location.href = redirecionamento_url;
       return;
     }
-
-    console.log("logado");
   } catch (error) {
-    // window.location.href = "../login-usuarios/index.html";
+    window.location.href = redirecionamento_url;
   }
 });
 
@@ -47,8 +37,26 @@ window.onload = () => {
     }
   };
 
-  btnEnviar.onclick = () => {
-    if (!btnEnviar.disabled) formDados.submit();
-    else alert("Complete os dados restantes");
+  btnEnviar.onclick = async () => {
+    if (!btnEnviar.disabled) {
+      let formData = new FormData(formDados);
+
+      let response = await fetch(
+        "../app/controlador.php?acao=criacaoAnuncios",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      let dados = await response.json();
+
+      if (!response.ok) {
+        alert(dados.message);
+        return;
+      }
+
+      if (dados.status === "success") alert(dados.message);
+    } else alert("Complete os dados restantes");
   };
 };
