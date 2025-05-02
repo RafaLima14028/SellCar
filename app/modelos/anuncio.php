@@ -58,35 +58,34 @@ class Anuncio
         $stmt->execute();
 
         $anuncios = [];
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        while ($row = $stmt->fetchAll(PDO::FETCH_ASSOC)) {
-            header("Info: " . $row['idAnuncio']);
-
+        foreach ($rows as $row) {
             $idAnuncio = $row['idAnuncio'];
 
-            $anuncios[$idAnuncio] = [
-                'id' => $row['idAnuncio'],
-                'marca' => $row['marca'],
-                'modelo' => $row['modelo'],
-                'ano' => $row['ano'],
-                'cor' => $row['cor'],
-                'quilometragem' => $row['quilometragem'],
-                'descricao' => $row['descricao'],
-                'valor' => $row['valor'],
-                'dataHora' => $row['dataHora'],
-                'estado' => $row['estado'],
-                'cidade' => $row['cidade'],
-                'fotos' => []
-            ];
+            if (!isset($anuncios[$idAnuncio])) {
+                $anuncios[$idAnuncio] = [
+                    'id' => $row['idAnuncio'],
+                    'marca' => $row['marca'],
+                    'modelo' => $row['modelo'],
+                    'ano' => $row['ano'],
+                    'cor' => $row['cor'],
+                    'quilometragem' => $row['quilometragem'],
+                    'descricao' => $row['descricao'],
+                    'valor' => $row['valor'],
+                    'dataHora' => $row['dataHora'],
+                    'estado' => $row['estado'],
+                    'cidade' => $row['cidade'],
+                    'fotos' => []
+                ];
+            }
 
             if (!empty($row['nomeArqFoto'])) {
                 $anuncios[$idAnuncio]['fotos'][] = "uploads/anuncios/{$idAnuncio}/{$row['nomeArqFoto']}";
             }
         }
 
-        $anuncios = array_values($anuncios);
-
-        return $anuncios;
+        return array_values($anuncios);
     }
 
     public static function GetAnuncioById($pdo, $idAnuncio)
@@ -147,7 +146,7 @@ class Anuncio
         }
 
         $anuncio['fotos'] = $fotos;
-        
+
         return $anuncio;
     }
 }
