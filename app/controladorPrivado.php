@@ -10,6 +10,48 @@ $acao = $_GET['acao'] ?? '';
 $pdo = mysqlConnect();
 
 switch ($acao) {
+    case "buscaAnuncioComFotoPeloId":
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        if (!isset($_SESSION['user_id'])) {
+            http_response_code(401);
+            echo json_encode([
+                "status" => "error",
+                "message" => "Usuário não logado"
+            ]);
+            exit;
+        }
+
+        $idAnuncio = $_GET['idAnuncio'] ?? 0;
+
+        header("Content-Type: application/json; charset=UTF-8");
+
+        if ($idAnuncio <= 0) {
+            http_response_code(400);
+            echo json_encode([
+                "status" => "error",
+                "message" => "Faltou o ID do anúncio"
+            ]);
+            exit;
+        }
+
+        try {
+            $anuncio = Anuncio::GetAnuncioById($pdo, $idAnuncio);
+
+            http_response_code(200);
+            echo json_encode($anuncio);
+        } catch (Exception $e) {
+            http_response_code(500);
+            echo json_encode([
+                "status" => "error",
+                "message" => "Erro na busca pelo anúncio"
+            ]);
+        }
+
+        break;
+
     case "criacaoAnuncios":
         $marca = $_POST['marca'] ?? '';
         $modelo = $_POST['modelo'] ?? '';

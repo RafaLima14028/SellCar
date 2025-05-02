@@ -88,4 +88,66 @@ class Anuncio
 
         return $anuncios;
     }
+
+    public static function GetAnuncioById($pdo, $idAnuncio)
+    {
+        $sql = <<<SQL
+        SELECT 
+            Anuncio.*, 
+            Foto.nomeArqFoto 
+        FROM 
+            Anuncio 
+        LEFT JOIN 
+            Foto 
+        ON 
+            Anuncio.id = Foto.idAnuncio 
+        WHERE 
+            Anuncio.id = :idAnuncio
+        SQL;
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':idAnuncio', $idAnuncio, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        if (empty($resultado)) {
+            http_response_code(404);
+            echo json_encode([
+                "status" => "error",
+                "message" => "Anúncio não encontrado"
+            ]);
+            exit;
+        }
+
+        $anuncio = null;
+        $fotos = [];
+
+        foreach ($resultado as $row) {
+            if ($anuncio === null) {
+                $anuncio = [
+                    'id' => $row['id'],
+                    'marca' => $row['marca'],
+                    'modelo' => $row['modelo'],
+                    'ano' => $row['ano'],
+                    'cor' => $row['cor'],
+                    'quilometragem' => $row['quilometragem'],
+                    'descricao' => $row['descricao'],
+                    'valor' => $row['valor'],
+                    'dataHora' => $row['dataHora'],
+                    'estado' => $row['estado'],
+                    'cidade' => $row['cidade'],
+                    'idAnunciante' => $row['idAnunciante'],
+                ];
+            }
+
+            if (!empty($row['nomeArqFoto'])) {
+                $fotos[] = $row['nomeArqFoto'];
+            }
+        }
+
+        $anuncio['fotos'] = $fotos;
+        
+        return $anuncio;
+    }
 }
