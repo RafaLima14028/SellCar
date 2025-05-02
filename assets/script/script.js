@@ -1,59 +1,51 @@
+var paginaAtual = 1;
+
+var funcaoAtualDeAtualizacaoDoScroll = carregarAnuncios;
+
 document.addEventListener("DOMContentLoaded", () => {
-  var paginaAtual = 1;
-  var carregando = false;
+  funcaoAtualDeAtualizacaoDoScroll();
+});
 
-  async function exibirAnuncios(anuncios) {
-    anuncios.forEach((anuncio) => {
-      let marca = anuncio.marca;
-      let modelo = anuncio.modelo;
-      let ano = anuncio.ano;
-      let cidade = anuncio.cidade;
-      let valor = anuncio.valor;
-      let img0 = anuncio.fotos[0];
+async function exibirAnuncios(anuncios) {
+  anuncios.forEach((anuncio) => {
+    let marca = anuncio.marca;
+    let modelo = anuncio.modelo;
+    let ano = anuncio.ano;
+    let cidade = anuncio.cidade;
+    let valor = anuncio.valor;
+    let img0 = anuncio.fotos[0];
 
-      montaCard(img0, marca, modelo, ano, cidade, valor);
-    });
-  }
-
-  async function carregarAnuncios() {
-    if (carregando) return;
-
-    carregando = true;
-
-    try {
-      let response = await fetch(
-        "../../app/controlador.php?acao=listarAnuncios&pagina=" + paginaAtual
-      );
-
-      if (!response.ok) {
-        alert("Erro ao carregar os anúncios");
-        return;
-      }
-
-      let anuncios = await response.json();
-
-      if (anuncios.length === 0) return;
-
-      paginaAtual++;
-
-      exibirAnuncios(anuncios);
-    } catch (error) {
-      alert("Erro ao carregar os anúncios");
-    } finally {
-      carregando = false;
-    }
-  }
-
-  window.addEventListener("scroll", () => {
-    if (
-      window.innerHeight + window.screenY >=
-      document.body.offsetHeight - 100
-    ) {
-      carregarAnuncios();
-    }
+    montaCard(img0, marca, modelo, ano, cidade, valor);
   });
+}
 
-  carregarAnuncios();
+async function carregarAnuncios() {
+  try {
+    let response = await fetch(
+      "../../app/controlador.php?acao=listarAnuncios&pagina=" + paginaAtual
+    );
+
+    if (!response.ok) {
+      alert("Erro ao carregar os anúncios");
+      return;
+    }
+
+    let anuncios = await response.json();
+
+    if (anuncios.length === 0) return;
+
+    paginaAtual++;
+
+    exibirAnuncios(anuncios);
+  } catch (error) {
+    alert("Erro ao carregar os anúncios");
+  }
+}
+
+window.addEventListener("scroll", () => {
+  if (window.innerHeight + window.screenY >= document.body.offsetHeight - 100) {
+    funcaoAtualDeAtualizacaoDoScroll();
+  }
 });
 
 const listaAnuncios = document.getElementById("lista-anuncios");
@@ -222,7 +214,9 @@ async function carregaCidades() {
 }
 
 async function carregaVeiculosDoModelo() {
-  if (marca.value === "" || modelo.value === "" || cidade.value === "") return;
+  if (marca.value === "" || modelo.value === "" || cidade.value === "") {
+    return;
+  }
 
   let response = await fetch(
     "../../app/controlador.php?acao=filtrarAnuncios&marca=" +
@@ -239,6 +233,8 @@ async function carregaVeiculosDoModelo() {
     alert(dados.message);
     return;
   }
+
+  funcaoAtualDeAtualizacaoDoScroll = carregaVeiculosDoModelo;
 
   listaAnuncios.innerHTML = "";
 
