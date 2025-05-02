@@ -42,7 +42,7 @@ window.onload = () => {
       let formData = new FormData(formDados);
 
       let response = await fetch(
-        "../app/controlador.php?acao=criacaoAnuncios",
+        "../app/controladorPrivado.php?acao=criacaoAnuncios",
         {
           method: "POST",
           body: formData,
@@ -56,7 +56,10 @@ window.onload = () => {
         return;
       }
 
-      if (dados.status === "success") alert(dados.message);
+      if (dados.status === "success") {
+        alert(dados.message);
+        window.location.href = "../home-interna/index.html";
+      }
     } else alert("Complete os dados restantes");
   };
 };

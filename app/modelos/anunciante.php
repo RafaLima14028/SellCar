@@ -29,11 +29,7 @@ class Anunciante
 
         $stmt->execute([$email]);
 
-        header("Info: " . $stmt->rowCount() . " email: " . $email);
-
         while ($row = $stmt->fetch()) {
-            header("Info1: Entrou no while");
-
             if (password_verify($senha, $row["senhaHash"])) {
                 return [
                     "status" => "success",
