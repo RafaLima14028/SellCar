@@ -10,6 +10,171 @@ $acao = $_GET['acao'] ?? '';
 $pdo = mysqlConnect();
 
 switch ($acao) {
+    case "filtrarAnuncios":
+        header("Content-Type: application/json; charset=UTF-8");
+
+        $marca = $_GET['marca'] ?? '';
+        $modelo = $_GET['modelo'] ?? '';
+        $cidade = $_GET['cidade'] ?? '';
+
+        try {
+            $sql = "SELECT 
+                    a.id AS idAnuncio, 
+                    a.marca, 
+                    a.modelo, 
+                    a.ano, 
+                    a.cor, 
+                    a.quilometragem, 
+                    a.descricao, 
+                    a.valor, 
+                    a.dataHora, 
+                    a.estado, 
+                    a.cidade, 
+                    f.nomeArqFoto 
+                FROM 
+                    Anuncio a
+                LEFT JOIN 
+                    Foto f ON a.id = f.idAnuncio
+                WHERE 1=1";
+
+            $params = [];
+            $types = '';
+
+            if (!empty($marca)) {
+                $sql .= " AND a.marca = ?";
+                $params[] = $marca;
+                $types .= 's';
+            }
+
+            if (!empty($modelo)) {
+                $sql .= " AND a.modelo = ?";
+                $params[] = $modelo;
+                $types .= 's';
+            }
+
+            if (!empty($cidade)) {
+                $sql .= " AND a.cidade = ?";
+                $params[] = $cidade;
+                $types .= 's';
+            }
+
+            $sql .= " ORDER BY a.dataHora DESC LIMIT 20";
+
+            $stmt = $pdo->prepare($sql);
+
+            if (!empty($params)) {
+                $stmt->execute($params);
+            } else {
+                $stmt->execute();
+            }
+
+            $anuncios = [];
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            foreach ($results as $row) {
+                $idAnuncio = $row['idAnuncio'];
+
+                if (!isset($anuncios[$idAnuncio])) {
+                    $anuncios[$idAnuncio] = [
+                        'id' => $idAnuncio,
+                        'marca' => $row['marca'],
+                        'modelo' => $row['modelo'],
+                        'ano' => $row['ano'],
+                        'cor' => $row['cor'],
+                        'quilometragem' => $row['quilometragem'],
+                        'descricao' => $row['descricao'],
+                        'valor' => (float)$row['valor'],
+                        'dataHora' => $row['dataHora'],
+                        'estado' => $row['estado'],
+                        'cidade' => $row['cidade'],
+                        'fotos' => []
+                    ];
+                }
+
+                if (!empty($row['nomeArqFoto'])) {
+                    $anuncios[$idAnuncio]['fotos'][] = "uploads/anuncios/{$idAnuncio}/{$row['nomeArqFoto']}";
+                }
+            }
+
+            echo json_encode(array_values($anuncios));
+        } catch (Exception $e) {
+            http_response_code(500);
+            echo json_encode(["status" => "error", "message" => "Erro ao listar anúncios: " . $e->getMessage()]);
+        }
+        
+        break;
+
+    case "cidadesDestintas":
+        $marca = $_GET['marca'] ?? '';
+        $modelo = $_GET['modelo'] ?? '';
+
+        if (empty($marca) || empty($modelo)) {
+            http_response_code(400);
+            echo json_encode(["status" => "error", "message" => "Marca ou modelo não informados"]);
+            exit;
+        }
+
+        try {
+            $sql = <<<SQL
+            SELECT DISTINCT cidade FROM Anuncio WHERE marca = ? AND modelo = ? AND cidade IS NOT NULL AND cidade != '' ORDER BY cidade
+            SQL;
+
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$marca, $modelo]);
+
+            $cidades = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+            echo json_encode($cidades);
+        } catch (Exception $e) {
+            http_response_code(500);
+            echo json_encode(["status" => "error", "message" => "Erro ao listar cidades"]);
+        }
+
+        break;
+    case "modelosDestintas":
+        $marca = $_GET['marca'] ?? '';
+
+        if (empty($marca)) {
+            http_response_code(400);
+            echo json_encode(["status" => "error", "message" => "Marca não informada"]);
+            exit;
+        }
+        try {
+            $sql = <<<SQL
+            SELECT DISTINCT modelo FROM Anuncio WHERE marca = ? AND modelo IS NOT NULL AND modelo != '' ORDER BY modelo
+            SQL;
+
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$marca]);
+
+            $modelos = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+            echo json_encode($modelos);
+        } catch (Exception $e) {
+            http_response_code(500);
+            echo json_encode(["status" => "error", "message" => "Erro ao listar modelos"]);
+        }
+
+        break;
+    case "marcasDistintas":
+        try {
+            $stmt = $pdo->query(
+                <<<SQL
+                SELECT DISTINCT marca FROM Anuncio WHERE marca IS NOT NULL AND marca != '' ORDER BY marca
+                SQL
+            );
+
+            $marcas = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+            http_response_code(200);
+            echo json_encode($marcas);
+        } catch (Exception $e) {
+            http_response_code(500);
+            echo json_encode(["status" => "error", "message" => "Erro ao listar marcas"]);
+        }
+
+        break;
+
     case "listarAnuncios":
         header("Content-Type: application/json; charset=UTF-8");
 
