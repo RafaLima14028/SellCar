@@ -1,15 +1,29 @@
-document.addEventListener("DOMContentLoaded", () => {
+const params = new URLSearchParams(window.location.search);
+const anuncioId = params.get("id");
+
+if (!anuncioId) {
+  alert("Este anúncio não existe");
+  window.history.back();
+}
+
+document.addEventListener("DOMContentLoaded", async () => {
   async function verificaSeEstaLogado() {
+    let redirecionamento_url = "../../../login-usuarios/index.html";
+
     try {
       let response = await fetch(
         "../../../app/controlador.php?acao=estaLogado"
       );
 
-      let redirecionamento_url = "../../../home-interna/index.html";
+      if (!response.ok) {
+        alert("Usuário deslogado");
+        window.location.href = redirecionamento_url;
+        return;
+      }
 
       let dados = await response.json();
 
-      if (dados.status === "logado") {
+      if (dados.status !== "logado") {
         window.location.href = redirecionamento_url;
         return;
       }
@@ -106,8 +120,8 @@ document.addEventListener("DOMContentLoaded", () => {
     montaImagensLayout(fotos, anuncio.id);
   }
 
-  verificaSeEstaLogado();
-  buscaPeloAnuncio(1);
+  await verificaSeEstaLogado();
+  buscaPeloAnuncio(anuncioId);
 });
 
 function menu_hamburguer() {

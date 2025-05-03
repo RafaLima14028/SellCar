@@ -10,6 +10,152 @@ $acao = $_GET['acao'] ?? '';
 $pdo = mysqlConnect();
 
 switch ($acao) {
+    case "excluirCarro":
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        header("Content-Type: application/json; charset=UTF-8");
+
+        if (!isset($_SESSION['user_id'])) {
+            http_response_code(401);
+            echo json_encode([
+                "status" => "error",
+                "message" => "Usuário não logado"
+            ]);
+            exit;
+        }
+
+        $idAnunciante = $_SESSION['user_id'];
+        $idAnuncio = $_GET['idAnuncio'] ?? 0;
+
+        if ($idAnuncio <= 0) {
+            http_response_code(400);
+            echo json_encode([
+                "status" => "error",
+                "message" => "Faltou o ID do anúncio"
+            ]);
+            exit;
+        }
+
+        $queryVerificacao = "SELECT id FROM Anuncio WHERE id = :idAnuncio AND idAnunciante = :idAnunciante";
+
+        $stmtVerificacao = $pdo->prepare($queryVerificacao);
+
+        $stmtVerificacao->bindParam(':idAnuncio', $idAnuncio, PDO::PARAM_INT);
+        $stmtVerificacao->bindParam(':idAnunciante', $idAnunciante, PDO::PARAM_INT);
+
+        $stmtVerificacao->execute();
+
+        if ($stmtVerificacao->rowCount() > 0) {
+            $queryExcluirFotos = "DELETE FROM Foto WHERE idAnuncio = :idAnuncio";
+            $stmtExcluirFotos = $pdo->prepare($queryExcluirFotos);
+            $stmtExcluirFotos->bindParam(':idAnuncio', $idAnuncio, PDO::PARAM_INT);
+            $stmtExcluirFotos->execute();
+
+            $queryExcluirInteresses = "DELETE FROM Interesse WHERE idAnuncio = :idAnuncio";
+            $stmtExcluirInteresses = $pdo->prepare($queryExcluirInteresses);
+            $stmtExcluirInteresses->bindParam(':idAnuncio', $idAnuncio, PDO::PARAM_INT);
+            $stmtExcluirInteresses->execute();
+
+            $queryExcluirAnuncio = "DELETE FROM Anuncio WHERE id = :idAnuncio";
+            $stmtExcluirAnuncio = $pdo->prepare($queryExcluirAnuncio);
+            $stmtExcluirAnuncio->bindParam(':idAnuncio', $idAnuncio, PDO::PARAM_INT);
+            $stmtExcluirAnuncio->execute();
+        }
+
+        http_response_code(200);
+        echo json_encode([
+            "status" => "success"
+        ]);
+
+        break;
+    case "buscaCarrosDoUsuario":
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        header("Content-Type: application/json; charset=UTF-8");
+
+        if (!isset($_SESSION['user_id'])) {
+            http_response_code(401);
+            echo json_encode([
+                "status" => "error",
+                "message" => "Usuário não logado"
+            ]);
+            exit;
+        }
+
+        $idAnunciante = $_SESSION['user_id'];
+
+        $query = <<<SQL
+        SELECT 
+            Anuncio.id AS anuncioId,
+            Anuncio.marca,
+            Anuncio.modelo,
+            Anuncio.ano,
+            Anuncio.cor,
+            Anuncio.quilometragem,
+            Anuncio.descricao,
+            Anuncio.valor,
+            Anuncio.dataHora,
+            Anuncio.estado,
+            Anuncio.cidade,
+            Foto.nomeArqFoto
+        FROM 
+            Anuncio
+        LEFT JOIN 
+            Foto ON Anuncio.id = Foto.idAnuncio
+        WHERE 
+            Anuncio.idAnunciante = :idAnunciante
+        SQL;
+
+        try {
+            $stmt = $pdo->prepare($query);
+            $stmt->bindParam(":idAnunciante", $idAnunciante, PDO::PARAM_INT);
+            $stmt->execute();
+
+            $resultados = [];
+            $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            foreach ($rows as $row) {
+                $anuncioId = $row['anuncioId'];
+
+                if (!isset($resultados[$anuncioId])) {
+                    $resultados[$anuncioId] = [
+                        'anuncioId' => $row['anuncioId'],
+                        'marca' => $row['marca'],
+                        'modelo' => $row['modelo'],
+                        'ano' => $row['ano'],
+                        'cor' => $row['cor'],
+                        'quilometragem' => $row['quilometragem'],
+                        'descricao' => $row['descricao'],
+                        'valor' => $row['valor'],
+                        'dataHora' => $row['dataHora'],
+                        'estado' => $row['estado'],
+                        'cidade' => $row['cidade'],
+                        'fotos' => []
+                    ];
+                }
+
+                if (!empty($row['nomeArqFoto'])) {
+                    $resultados[$anuncioId]['fotos'][] = $row['nomeArqFoto'];
+                }
+            }
+
+            http_response_code(200);
+            echo json_encode(array_values($resultados));
+        } catch (Exception $e) {
+            http_response_code(500);
+            echo json_encode(
+                [
+                    "status" => "error",
+                    "message" => "Não foi possível buscar os anúncios do usuário"
+                ]
+            );
+        }
+
+        break;
     case "buscaAnuncioComFotoPeloId":
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
