@@ -160,3 +160,23 @@ function menu_hamburguer() {
 
 const menuHamburguer = document.getElementById("menu-hamburguer");
 menuHamburguer.onclick = menuHamburguer;
+
+const a_logoff = document.getElementById("a-logoff");
+a_logoff.onclick = async () => {
+  let response = await fetch("../../../app/controlador.php?acao=logoutUsuario");
+
+  if (!response.ok) {
+    alert("Erro no momento do logoff");
+    return;
+  }
+
+  let dados = await response.json();
+
+  if (dados.status !== "success") {
+    alert("Erro no momento do logoff");
+    return;
+  }
+
+  alert("Logoff realizado com sucesso!");
+  window.location.href = "../../../index.html";
+};

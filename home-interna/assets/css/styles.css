@@ -211,6 +211,10 @@ footer {
 
 #lista-anuncios {
   width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 @media (max-width: 768px) {
