@@ -26,6 +26,21 @@ nav {
   display: inline-block;
 }
 
+#interesse-carro-btn {
+  font-size: 1.2em;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-decoration: none;
+  color: #ffffff;
+  background-color: #520002;
+  padding: 10px 15px;
+  border-radius: 50px;
+  width: 100%;
+  border: none;
+  margin: 10px auto;
+  cursor: pointer;
+}
+
 #img-logo {
   float: left;
   height: 70px;

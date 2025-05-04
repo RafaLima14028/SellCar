@@ -4,12 +4,49 @@ require "conexaoMysql.php";
 require "./modelos/anuncio.php";
 require "./modelos/foto.php";
 require "./modelos/anunciante.php";
+require "./modelos/interesse.php";
 
 $acao = $_GET['acao'] ?? '';
 
 $pdo = mysqlConnect();
 
 switch ($acao) {
+    case "registrarInteresse":
+        header("Content-Type: application/json");
+
+        try {
+            $nome = $_POST['nome'] ?? '';
+            $telefone = $_POST['telefone'] ?? '';
+            $mensagem = $_POST['mensagem'] ?? '';
+            $idAnuncio = $_POST['idAnuncio'] ?? 0;
+
+            if (empty($nome) || empty($telefone) || empty($mensagem) || $idAnuncio <= 0) {
+                throw new Exception("Todos os campos são obrigatórios");
+            }
+
+            $telefone = preg_replace('/\D/', '', $telefone); // mantém apenas números
+
+            $pdo->beginTransaction();
+
+            Interesse::Create($pdo, $nome, $telefone, $mensagem, $idAnuncio);
+
+            $pdo->commit();
+
+            echo json_encode([
+                'success' => true,
+                'message' => 'Interesse registrado com sucesso!'
+            ]);
+        } catch (Exception $e) {
+            $pdo->rollBack();
+
+            http_response_code(400);
+            echo json_encode([
+                'success' => false,
+                'message' => $e->getMessage()
+            ]);
+        }
+
+        break;
     case "excluirCarro":
         if (session_status() === PHP_SESSION_NONE) {
             session_start();

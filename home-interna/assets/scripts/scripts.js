@@ -115,33 +115,6 @@ function montaCard(img0, marca, modelo, ano, cidade, valor, anuncioId) {
   divDetalhesCarroEsquerdo.appendChild(pAno);
   divDetalhesCarro.appendChild(divDetalhesCarroEsquerdo);
 
-  let aBtnInteresse = document.createElement("a");
-  aBtnInteresse.className = "a-btn-interesse";
-  aBtnInteresse.href = "../../../listagem-interesses/index.html";
-  let spanIconeInteresse = document.createElement("span");
-  spanIconeInteresse.className = "material-icons mode_comment";
-  spanIconeInteresse.innerText = "mode_comment";
-
-  aBtnInteresse.appendChild(spanIconeInteresse);
-
-  let aBtnDelete = document.createElement("a");
-  aBtnDelete.className = "a-btn-delete";
-  aBtnDelete.href = "#";
-  let spanIconeDelte = document.createElement("span");
-  spanIconeDelte.className = "material-icons mode_comment";
-  spanIconeDelte.innerText = "delete";
-
-  aBtnDelete.onclick = () => {
-    excluirAnuncio(anuncioId);
-    window.location.reload();
-  };
-
-  aBtnDelete.appendChild(spanIconeDelte);
-
-  divDetalhesCarroDireitoIcones.appendChild(aBtnInteresse);
-  divDetalhesCarroDireitoIcones.appendChild(aBtnDelete);
-  divDetalhesCarroDireito.appendChild(divDetalhesCarroDireitoIcones);
-
   let pCidade = document.createElement("p");
   pCidade.innerText = "Em " + cidade;
 

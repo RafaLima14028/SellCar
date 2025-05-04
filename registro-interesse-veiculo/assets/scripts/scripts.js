@@ -1,100 +1,162 @@
-// assets/scripts/scripts.js
+const urlParams = new URLSearchParams(window.location.search);
+const idAnuncio = urlParams.get("id");
 
-// Quando a página carrega, pega o ID do anúncio da URL e carrega os dados
-document.addEventListener('DOMContentLoaded', function() {
-    // Obtém o ID do anúncio da URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const idAnuncio = urlParams.get('id');
+document.addEventListener("DOMContentLoaded", async function () {
+  if (!idAnuncio) {
+    alert("Anúncio não especificado");
+    window.location.href = "../index.html";
+    return;
+  }
 
-    if (!idAnuncio) {
-        alert('Anúncio não especificado');
-        window.location.href = '../index.html';
+  async function verificaSeEstaLogado() {
+    try {
+      let response = await fetch(
+        "../../../app/controlador.php?acao=estaLogado"
+      );
+
+      let redirecionamento_url = "../../../login-usuarios/index.html";
+
+      if (!response.ok) {
+        alert("Usuário deslogado");
+        window.location.href = redirecionamento_url;
         return;
+      }
+
+      let dados = await response.json();
+
+      if (dados.status !== "logado") {
+        window.location.href = redirecionamento_url;
+        return;
+      }
+    } catch (error) {
+      window.location.href = redirecionamento_url;
     }
+  }
 
-    // Define o ID do anúncio no campo hidden do formulário
-    document.getElementById('idAnuncio').value = idAnuncio;
+  await verificaSeEstaLogado();
 
-    // Carrega os dados do anúncio
-    carregarDadosAnuncio(idAnuncio);
+  carregarDadosAnuncio(idAnuncio);
 
-    // Configura o evento de submit do formulário
-    document.getElementById('formInteresse').addEventListener('submit', function(e) {
-        e.preventDefault();
-        enviarInteresse();
+  document
+    .getElementById("formInteresse")
+    .addEventListener("submit", function (e) {
+      e.preventDefault();
+      enviarInteresse();
     });
 });
 
 // Função para carregar os dados do anúncio
 async function carregarDadosAnuncio(idAnuncio) {
-    try {
-        const response = await fetch(`../app/controlador.php?acao=obterAnuncio&id=${idAnuncio}`);
-        
-        if (!response.ok) {
-            throw new Error('Erro ao carregar dados do anúncio');
-        }
+  try {
+    const response = await fetch(
+      "../../../app/controladorPrivado.php?acao=buscaAnuncioComFotoPeloId&idAnuncio=" +
+        idAnuncio
+    );
 
-        const anuncio = await response.json();
-
-        // Atualiza a imagem do veículo
-        const imgVeiculo = document.querySelector('.container-img img');
-        if (anuncio.fotos && anuncio.fotos.length > 0) {
-            imgVeiculo.src = `../assets/img/${anuncio.fotos[0]}`;
-        }
-
-        // Atualiza os detalhes do veículo
-        document.querySelector('.detalhes-carro-esquerda p:nth-child(1)').textContent = `Marca: ${anuncio.marca}`;
-        document.querySelector('.detalhes-carro-esquerda p:nth-child(2)').textContent = `Modelo: ${anuncio.modelo}`;
-        document.querySelector('.detalhes-carro-esquerda p:nth-child(3)').textContent = `Ano: ${anuncio.ano}`;
-        document.querySelector('.detalhes-carro-direto-cidade p').textContent = `Em ${anuncio.cidade}`;
-        document.querySelector('.detalhes-carro-valor strong').textContent = `R$ ${formatarValor(anuncio.valor)}`;
-
-    } catch (error) {
-        console.error('Erro:', error);
-        alert('Não foi possível carregar os dados do anúncio');
+    if (!response.ok) {
+      throw new Error("Erro ao carregar dados do anúncio");
     }
+
+    const anuncio = await response.json();
+
+    const containerCard = document.querySelector(".container-card");
+
+    let divImg = document.createElement("div");
+    divImg.className = "container-img";
+
+    let img = document.createElement("img");
+    img.src =
+      "../../../app/uploads/anuncios/" + idAnuncio + "/" + anuncio.fotos[0];
+    img.alt = "Imagem do veículo";
+
+    divImg.appendChild(img);
+    containerCard.appendChild(divImg);
+
+    let div_detalhes_carro = document.createElement("div");
+    div_detalhes_carro.className = "detalhes-carro";
+
+    let div_detalhes_carro_esquerdo = document.createElement("div");
+    div_detalhes_carro_esquerdo.className = "detalhes-carro-esquerda";
+
+    let pMarca = document.createElement("p");
+    pMarca.innerText = "Marca: " + anuncio.marca;
+
+    let pModelo = document.createElement("p");
+    pModelo.innerText = "Modelo: " + anuncio.modelo;
+
+    let pAno = document.createElement("p");
+    pAno.innerText = "Ano: " + anuncio.ano;
+
+    div_detalhes_carro_esquerdo.appendChild(pMarca);
+    div_detalhes_carro_esquerdo.appendChild(pModelo);
+    div_detalhes_carro_esquerdo.appendChild(pAno);
+    div_detalhes_carro.appendChild(div_detalhes_carro_esquerdo);
+
+    let div_detalhes_carro_direto = document.createElement("div");
+    div_detalhes_carro_direto.className = "detalhes-carro-direto";
+
+    let div_detalhes_carro_direto_cidade = document.createElement("div");
+    div_detalhes_carro_direto_cidade.className = "detalhes-carro-direto-cidade";
+
+    let pCidade = document.createElement("p");
+    pCidade.innerText = "Em " + anuncio.cidade;
+
+    div_detalhes_carro_direto_cidade.appendChild(pCidade);
+    div_detalhes_carro_direto.appendChild(div_detalhes_carro_direto_cidade);
+    div_detalhes_carro.appendChild(div_detalhes_carro_direto);
+
+    let detalhes_carro_valor = document.createElement("div");
+    detalhes_carro_valor.className = "detalhes-carro-valor";
+
+    let pValor = document.createElement("p");
+    pValor.innerHTML = "<strong>R$ " + anuncio.valor + "</strong>";
+
+    detalhes_carro_valor.appendChild(pValor);
+    div_detalhes_carro.appendChild(detalhes_carro_valor);
+
+    containerCard.appendChild(div_detalhes_carro);
+  } catch (error) {
+    console.error("Erro:", error);
+    alert("Não foi possível carregar os dados do anúncio");
+  }
 }
 
-// Função para formatar o valor no padrão brasileiro
-function formatarValor(valor) {
-    return parseFloat(valor).toLocaleString('pt-BR', {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2
-    });
-}
-
-// Função para enviar o formulário de interesse
 async function enviarInteresse() {
-    const form = document.getElementById('formInteresse');
-    const btnEnviar = document.getElementById('btn-enviar');
-    const formData = new FormData(form);
+  const form = document.getElementById("formInteresse");
+  const btnEnviar = document.getElementById("btn-enviar");
+  const formData = new FormData(form);
 
-    // Desabilita o botão durante o envio
-    btnEnviar.disabled = true;
-    btnEnviar.value = 'Enviando...';
+  btnEnviar.disabled = true;
+  btnEnviar.value = "Enviando...";
 
-    try {
-        const response = await fetch('../app/controlador.php?acao=registrarInteresse', {
-            method: 'POST',
-            body: formData
-        });
+  try {
+    formData.append("idAnuncio", idAnuncio);
 
-        const data = await response.json();
+    const response = await fetch(
+      "../../../app/controladorPrivado.php?acao=registrarInteresse",
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
 
-        if (!response.ok) {
-            throw new Error(data.message || 'Erro ao registrar interesse');
-        }
+    const data = await response.json();
 
-        // Se chegou aqui, o registro foi bem-sucedido
-        alert(data.message || 'Interesse registrado com sucesso!');
-        form.reset();
-
-    } catch (error) {
-        console.error('Erro:', error);
-        alert(error.message || 'Erro ao enviar o formulário. Por favor, tente novamente.');
-    } finally {
-        // Reabilita o botão
-        btnEnviar.disabled = false;
-        btnEnviar.value = 'Enviar';
+    if (!response.ok) {
+      throw new Error(data.message || "Erro ao registrar interesse");
     }
+
+    alert(data.message || "Interesse registrado com sucesso!");
+
+    window.location.href = "../../../home-interna/index.html";
+  } catch (error) {
+    console.error("Erro:", error);
+    alert(
+      error.message ||
+        "Erro ao enviar o formulário. Por favor, tente novamente."
+    );
+  } finally {
+    btnEnviar.disabled = false;
+    btnEnviar.value = "Enviar";
+  }
 }

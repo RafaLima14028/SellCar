@@ -162,3 +162,9 @@ a_logoff.onclick = async () => {
   alert("Logoff realizado com sucesso!");
   window.location.href = "../../../index.html";
 };
+
+
+const btn_interesse_carro = document.getElementById("interesse-carro-btn");
+btn_interesse_carro.onclick = () => {
+  window.location.href = "../../../registro-interesse-veiculo/index.html?id=" + anuncioId;
+};
