@@ -72,12 +72,13 @@ a_logoff.onclick = async () => {
   window.location.href = "../../../index.html";
 };
 
-function montaCard(img0, marca, modelo, ano, cidade, valor) {
+function montaCard(img0, marca, modelo, ano, cidade, valor, anuncioId) {
   let sectionContainerCard = document.createElement("section");
   let divcontainerImg = document.createElement("div");
   let divDetalhesCarro = document.createElement("div");
   let divDetalhesCarroEsquerdo = document.createElement("div");
   let divDetalhesCarroDireito = document.createElement("div");
+  let divDetalhesCarroDireitoIcones = document.createElement("div");
   let divDetalhesCarroDireitoCidade = document.createElement("div");
   let divDetalhesCarroValor = document.createElement("div");
 
@@ -86,6 +87,7 @@ function montaCard(img0, marca, modelo, ano, cidade, valor) {
   divDetalhesCarro.className = "detalhes-carro";
   divDetalhesCarroEsquerdo.className = "detalhes-carro-esquerda";
   divDetalhesCarroDireito.className = "detalhes-carro-direto";
+  divDetalhesCarroDireitoIcones.className = "detalhes-carro-direto-icones";
   divDetalhesCarroDireitoCidade.className = "detalhes-carro-direto-cidade";
   divDetalhesCarroValor.className = "detalhes-carro-valor";
 
@@ -94,12 +96,12 @@ function montaCard(img0, marca, modelo, ano, cidade, valor) {
   img.src = caminhoFoto;
   img.alt = "Imagem do carro";
 
-  let aRedireciona = document.createElement("a");
-  aRedireciona.href = "../detalhes-anuncio/index.html";
+  let aImagem = document.createElement("a");
+  aImagem.href = "../../../detalhes-anuncio/index.html?id=" + anuncioId;
 
   divcontainerImg.appendChild(img);
-  aRedireciona.appendChild(divcontainerImg);
-  sectionContainerCard.appendChild(aRedireciona);
+  aImagem.appendChild(divcontainerImg);
+  sectionContainerCard.appendChild(aImagem);
 
   let pMarca = document.createElement("p");
   pMarca.innerText = "Marca: " + marca;
@@ -112,6 +114,33 @@ function montaCard(img0, marca, modelo, ano, cidade, valor) {
   divDetalhesCarroEsquerdo.appendChild(pModelo);
   divDetalhesCarroEsquerdo.appendChild(pAno);
   divDetalhesCarro.appendChild(divDetalhesCarroEsquerdo);
+
+  let aBtnInteresse = document.createElement("a");
+  aBtnInteresse.className = "a-btn-interesse";
+  aBtnInteresse.href = "../../../listagem-interesses/index.html";
+  let spanIconeInteresse = document.createElement("span");
+  spanIconeInteresse.className = "material-icons mode_comment";
+  spanIconeInteresse.innerText = "mode_comment";
+
+  aBtnInteresse.appendChild(spanIconeInteresse);
+
+  let aBtnDelete = document.createElement("a");
+  aBtnDelete.className = "a-btn-delete";
+  aBtnDelete.href = "#";
+  let spanIconeDelte = document.createElement("span");
+  spanIconeDelte.className = "material-icons mode_comment";
+  spanIconeDelte.innerText = "delete";
+
+  aBtnDelete.onclick = () => {
+    excluirAnuncio(anuncioId);
+    window.location.reload();
+  };
+
+  aBtnDelete.appendChild(spanIconeDelte);
+
+  divDetalhesCarroDireitoIcones.appendChild(aBtnInteresse);
+  divDetalhesCarroDireitoIcones.appendChild(aBtnDelete);
+  divDetalhesCarroDireito.appendChild(divDetalhesCarroDireitoIcones);
 
   let pCidade = document.createElement("p");
   pCidade.innerText = "Em " + cidade;
@@ -138,8 +167,9 @@ async function exibirAnuncios(anuncios) {
     let cidade = anuncio.cidade;
     let valor = anuncio.valor;
     let img0 = anuncio.fotos[0];
+    let anuncioId = anuncio.id;
 
-    montaCard(img0, marca, modelo, ano, cidade, valor);
+    montaCard(img0, marca, modelo, ano, cidade, valor, anuncioId);
   });
 }
 
@@ -303,8 +333,9 @@ async function carregaVeiculosDoModelo() {
     let cidade = anuncio.cidade;
     let valor = anuncio.valor;
     let img0 = anuncio.fotos[0];
+    let anuncioId = anuncio.id;
 
-    montaCard(img0, marca, modelo, ano, cidade, valor);
+    montaCard(img0, marca, modelo, ano, cidade, valor, anuncioId);
   });
 }
 
