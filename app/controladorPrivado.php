@@ -11,8 +11,110 @@ $acao = $_GET['acao'] ?? '';
 $pdo = mysqlConnect();
 
 switch ($acao) {
+    case "buscarInteresseUsuario":
+        header('Content-Type: application/json');
+
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        if (!isset($_SESSION['user_id'])) {
+            http_response_code(401);
+            echo json_encode([
+                "status" => "error",
+                "message" => "Usuário não logado"
+            ]);
+            exit;
+        }
+
+        $idAnunciante = $_SESSION['user_id'];
+
+        $sql = <<<SQL
+            SELECT 
+                a.id AS anuncio_id,
+                a.marca,
+                a.modelo,
+                a.ano,
+                a.cidade,
+                a.valor,
+                f.nomeArqFoto,
+                i.id AS interesse_id,
+                i.nome AS interessado_nome,
+                i.telfone AS interessado_telefone,
+                i.mensagem
+            FROM Anuncio a
+            LEFT JOIN Foto f ON a.id = f.idAnuncio
+            LEFT JOIN Interesse i ON a.id = i.idAnuncio
+            WHERE a.idAnunciante = :idAnunciante
+            ORDER BY a.id
+            SQL;
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':idAnunciante', $idAnunciante, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $carros = [];
+
+        foreach ($resultados as $linha) {
+            $anuncioId = $linha['anuncio_id'];
+
+            if (!isset($carros[$anuncioId])) {
+                $carros[$anuncioId] = [
+                    'idAnuncio' => $linha['anuncio_id'],
+                    'marca' => $linha['marca'],
+                    'modelo' => $linha['modelo'],
+                    'ano' => $linha['ano'],
+                    'cidade' => $linha['cidade'],
+                    'valor' => $linha['valor'],
+                    'fotos' => [],
+                    'interesses' => []
+                ];
+            }
+
+            if (!empty($linha['nomeArqFoto']) && !in_array($linha['nomeArqFoto'], $carros[$anuncioId]['fotos'])) {
+                $carros[$anuncioId]['fotos'][] = $linha['nomeArqFoto'];
+            }
+
+            if (!empty($linha['interesse_id'])) {
+                $interesseJaAdicionado = false;
+                foreach ($carros[$anuncioId]['interesses'] as $interesse) {
+                    if ($interesse['id'] === $linha['interesse_id']) {
+                        $interesseJaAdicionado = true;
+                        break;
+                    }
+                }
+
+                if (!$interesseJaAdicionado) {
+                    $carros[$anuncioId]['interesses'][] = [
+                        'id' => $linha['interesse_id'],
+                        'nome' => $linha['interessado_nome'],
+                        'telefone' => $linha['interessado_telefone'],
+                        'mensagem' => $linha['mensagem']
+                    ];
+                }
+            }
+        }
+
+        echo json_encode(array_values($carros));
+
+        break;
     case "registrarInteresse":
         header("Content-Type: application/json");
+
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        if (!isset($_SESSION['user_id'])) {
+            http_response_code(401);
+            echo json_encode([
+                "status" => "error",
+                "message" => "Usuário não logado"
+            ]);
+            exit;
+        }
 
         try {
             $nome = $_POST['nome'] ?? '';

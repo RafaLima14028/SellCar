@@ -114,4 +114,4 @@ Este projeto foi desenvolvido como parte de um trabalho de faculdade. Agradecemo
 
 - Colocar o valor correto de ©
 - Colocar o label em inputs que não tem
-- Implementar o logoff
+- Verificar se tudo está direcionando para as páginas corretamente
