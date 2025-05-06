@@ -85,6 +85,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     let descricao = anuncio.descricao;
     let fotos = anuncio.fotos;
 
+    const descricao_carro = document.getElementById("descricao-carro");
     const descricao_carro_p = document.getElementById("descricao-carro-p");
     const detalhes_carro_lado_direito = document.getElementById(
       "detalhes-carro-lado-direito"
@@ -112,10 +113,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     detalhes_carro_lado_direito.appendChild(p1);
     detalhes_carro_lado_direito.appendChild(p2);
 
-    let p3 = document.createElement("p");
-    p3.innerText = descricao;
+    if (descricao === "") {
+      descricao_carro.style.display = "none";
+    } else {
+      let p3 = document.createElement("p");
+      p3.innerText = descricao;
 
-    descricao_carro_p.appendChild(p3);
+      descricao_carro_p.appendChild(p3);
+      descricao_carro.appendChild(descricao_carro_p);
+    }
 
     montaImagensLayout(fotos, anuncio.id);
   }
